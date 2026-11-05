@@ -1,0 +1,1473 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NOCTIS — Studio Detailingu Premium</title>
+<meta name="description" content="NOCTIS — studio detailingu premium. Korekta lakieru, powłoki ceramiczne, folie ochronne PPF i detailing wnętrz. Jedno auto na raz, pełne skupienie na detalu.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Cpath d='M16 3.5 26.8 9.75v12.5L16 28.5 5.2 22.25V9.75Z' fill='none' stroke='%23FFC000' stroke-width='2'/%3E%3Cpath d='M11.5 21V11l9 10V11' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   TOKENS (z DESIGN.md)
+   ========================================================= */
+:root{
+  --black:#000000;          /* Absolute Black: tło strony */
+  --iron:#181818;           /* Dark Iron: stopka, głębokie sekcje */
+  --charcoal:#202020;       /* Charcoal: karty i panele */
+  --shadow:#313131;         /* Shadow: przygaszony tekst na ciemnym */
+  --graphite:#494949;
+  --ash:#7D7D7D;            /* Ash: tekst pomocniczy */
+  --steel:#969696;          /* Steel: tekst na kartach, badge */
+  --smoke:#F5F5F5;
+  --white:#FFFFFF;
+  --gold:#FFC000;           /* Lamborghini Gold: tylko główne CTA */
+  --gold-dark:#917300;      /* hover złotego CTA */
+  --gold-text:#FFCE3E;      /* akcenty w tekście */
+  --link-blue:#3860BE;      /* hover linków */
+  --teal:#1EAEDB;           /* hover przycisku ghost */
+  --overlay:rgba(0,0,0,.7);
+
+  --font:"Archivo","Roboto","Helvetica Neue",Arial,sans-serif;
+  --gutter:clamp(16px,4vw,40px);
+  --max:1440px;
+  --content:1200px;
+  --section-y:clamp(72px,10vw,160px);
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+
+/* =========================================================
+   RESET
+   ========================================================= */
+*,*::before,*::after{box-sizing:border-box}
+*{margin:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  background:var(--black);color:var(--white);
+  font-family:var(--font);font-size:16px;line-height:1.5;font-weight:400;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%}
+ul,ol{list-style:none;padding:0}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;padding:0}
+::selection{background:var(--gold);color:var(--black)}
+:focus-visible{outline:2px solid var(--white);outline-offset:3px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+body.no-scroll{overflow:hidden}
+
+/* =========================================================
+   TYPOGRAFIA
+   ========================================================= */
+.display,.d2,.h-section,.h-sub,.h-feature{
+  font-weight:400;text-transform:uppercase;font-stretch:75%;letter-spacing:0;
+}
+.display{font-size:clamp(54px,9.2vw,120px);line-height:.92}
+.d2{font-size:clamp(44px,6.4vw,80px);line-height:1}
+.h-section{font-size:clamp(36px,4.4vw,54px);line-height:1.05}
+.h-sub{font-size:clamp(28px,3.2vw,40px);line-height:1.1}
+.h-feature{font-size:clamp(22px,2vw,27px);line-height:1.2}
+.body-lg{font-size:18px;line-height:1.56;color:var(--ash)}
+.label{font-size:12px;line-height:1.83;letter-spacing:.96px;text-transform:uppercase;font-weight:500}
+.micro{font-size:10px;line-height:1.6;letter-spacing:.225px;text-transform:uppercase}
+.caption{font-size:14px;line-height:1.3;letter-spacing:-.42px;text-transform:uppercase;font-weight:600}
+.gold-text{color:var(--gold-text)}
+.muted{color:var(--ash)}
+
+/* indeks sekcji: numer + kreska pod kątem 12° (jak zakończenia LamboType) */
+.kicker{display:flex;align-items:center;gap:12px;color:var(--ash)}
+.kicker::before{
+  content:"";width:28px;height:1px;background:currentColor;transform:skewY(-12deg);
+}
+.kicker b{color:var(--white);font-weight:500}
+
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+.wrap{width:100%;max-width:var(--content);margin-inline:auto;padding-inline:var(--gutter)}
+.wrap-wide{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:var(--gutter)}
+.section{padding-block:var(--section-y)}
+.section-head{display:grid;gap:24px;margin-bottom:clamp(40px,6vw,80px)}
+@media (min-width:1024px){
+  .section-head{grid-template-columns:1fr 1fr;align-items:end;gap:40px}
+  .section-head .body-lg{max-width:46ch;justify-self:end}
+}
+
+/* =========================================================
+   PRZYCISKI (zero border-radius)
+   ========================================================= */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  min-height:48px;border-radius:0;white-space:nowrap;
+  transition:background-color .2s ease,color .2s ease,opacity .2s ease,border-color .2s ease;
+}
+.btn svg{width:16px;height:16px;flex:none}
+.btn-gold{
+  background:var(--gold);color:var(--black);
+  padding:20px 24px;font-size:16px;line-height:1;font-weight:400;
+}
+.btn-gold:hover{background:var(--gold-dark);color:var(--white)}
+.btn-gold:active{background:#6e5700}
+.btn-gold:focus-visible{outline:2px solid var(--white);outline-offset:3px}
+.btn-ghost{
+  background:transparent;color:var(--white);
+  border:1px solid var(--white);opacity:.5;
+  padding:16px 20px;font-size:14.4px;line-height:1;letter-spacing:.2px;
+  text-transform:uppercase;font-weight:400;
+}
+.btn-ghost:hover{background:var(--teal);border-color:var(--teal);opacity:.7}
+.btn-ghost:focus-visible{background:var(--teal);opacity:1;outline:2px solid var(--white);outline-offset:3px}
+.btn-white{background:var(--white);color:var(--charcoal);padding:16px 20px;font-size:14.4px;text-transform:uppercase;letter-spacing:.2px}
+.btn-white:hover{background:var(--steel)}
+.btn[disabled]{opacity:.35;pointer-events:none}
+.btn-row{display:flex;flex-wrap:wrap;gap:16px}
+@media (max-width:575px){
+  .btn-row{flex-direction:column;align-items:stretch}
+  .btn-row .btn{width:100%}
+}
+
+.link{
+  display:inline-flex;align-items:center;gap:8px;
+  text-transform:uppercase;font-size:13px;letter-spacing:.2px;font-weight:500;
+  text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1px;
+  transition:color .2s ease;
+}
+.link:hover{color:var(--link-blue)}
+
+.badge{
+  display:inline-block;background:var(--steel);color:var(--black);
+  padding:6px 8px;border-radius:2px;font-size:10px;line-height:1;
+  letter-spacing:.225px;text-transform:uppercase;font-weight:600;
+}
+
+/* =========================================================
+   NAWIGACJA
+   ========================================================= */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:50;
+  transition:background-color .3s ease;
+}
+.nav::before{
+  content:"";position:absolute;inset:0 0 -40px 0;pointer-events:none;
+  background:linear-gradient(rgba(0,0,0,.65),transparent);
+  transition:opacity .3s ease;
+}
+.nav.is-solid{background:var(--black)}
+.nav.is-solid::before{opacity:0}
+.nav__inner{
+  position:relative;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  height:72px;max-width:var(--max);margin-inline:auto;padding-inline:var(--gutter);
+}
+.nav__menu{
+  justify-self:start;display:flex;align-items:center;gap:12px;
+  min-height:48px;padding-right:12px;font-size:14px;letter-spacing:.6px;text-transform:uppercase;
+  transition:color .2s ease;
+}
+.nav__menu:hover{color:var(--steel)}
+.burger{width:22px;height:12px;position:relative}
+.burger i{position:absolute;left:0;right:0;height:1px;background:currentColor}
+.burger i:nth-child(1){top:0}
+.burger i:nth-child(2){bottom:0;right:6px}
+.logo{display:flex;align-items:center;gap:10px;justify-self:center}
+.logo svg{width:30px;height:30px}
+.logo span{font-size:20px;letter-spacing:4px;font-stretch:80%;font-weight:500}
+.nav__actions{justify-self:end;display:flex;align-items:center;gap:4px}
+.icon-btn{
+  width:48px;height:48px;display:grid;place-items:center;transition:color .2s ease;
+}
+.icon-btn:hover{color:var(--steel)}
+.icon-btn svg{width:22px;height:22px}
+@media (max-width:575px){
+  .nav__menu .nav__menu-text{display:none}
+  .logo span{font-size:17px;letter-spacing:3px}
+  .nav__actions .icon-btn--book{display:none}
+}
+
+/* pełnoekranowe menu */
+.menu{
+  position:fixed;inset:0;z-index:60;background:var(--black);
+  display:flex;flex-direction:column;
+  visibility:hidden;opacity:0;transition:opacity .35s ease,visibility 0s .35s;
+}
+.menu.is-open{visibility:visible;opacity:1;transition:opacity .35s ease}
+.menu__top{
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  height:72px;padding-inline:var(--gutter);max-width:var(--max);width:100%;margin-inline:auto;
+}
+.menu__close{justify-self:start;display:flex;align-items:center;gap:12px;min-height:48px;font-size:14px;letter-spacing:.6px;text-transform:uppercase}
+.menu__close svg{width:20px;height:20px}
+.menu__close:hover{color:var(--steel)}
+.menu__body{
+  flex:1;overflow:auto;display:grid;align-content:center;gap:48px;
+  max-width:var(--max);width:100%;margin-inline:auto;padding:24px var(--gutter) 48px;
+}
+.menu__list a{
+  display:flex;align-items:baseline;gap:20px;padding-block:4px;
+  font-size:clamp(40px,7vw,88px);line-height:1;text-transform:uppercase;font-stretch:75%;
+  color:var(--white);transition:color .2s ease;
+}
+.menu__list a span{font-size:12px;letter-spacing:.96px;color:var(--ash);font-stretch:100%;min-width:24px}
+.menu__list:hover a{color:var(--shadow)}
+.menu__list a:hover,.menu__list a:focus-visible{color:var(--white)}
+.menu__foot{display:grid;gap:24px;color:var(--ash);border-top:1px solid var(--charcoal);padding-top:24px}
+.menu__foot a:hover{color:var(--link-blue)}
+@media (min-width:768px){.menu__foot{grid-template-columns:repeat(3,1fr)}}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero{position:relative;height:100vh;height:100svh;min-height:640px;overflow:hidden;background:var(--black)}
+.hero__slide{
+  position:absolute;inset:0;opacity:0;visibility:hidden;
+  transition:opacity 1.2s ease,visibility 0s 1.2s;
+}
+.hero__slide.is-active{opacity:1;visibility:visible;transition:opacity 1.2s ease}
+.media{position:absolute;inset:0;overflow:hidden;background:var(--black)}
+.media img,.media canvas,.service__media canvas,.compare__layer canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero__slide .media > *{transform:scale(1.06);transition:transform 9s linear}
+.hero__slide.is-active .media > *{transform:scale(1)}
+@media (prefers-reduced-motion:reduce){.hero__slide .media > *{transform:none!important;transition:none}}
+.hero__shade{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,0) 28%,rgba(0,0,0,0) 45%,rgba(0,0,0,.92) 100%),
+    linear-gradient(90deg,rgba(0,0,0,.6) 0%,rgba(0,0,0,0) 60%);
+}
+.hero__content{
+  position:absolute;inset:auto 0 0 0;z-index:2;
+  padding-bottom:clamp(120px,16vh,170px);
+}
+.hero__text{position:relative;min-height:clamp(260px,34vw,400px)}
+.hero__copy{
+  position:absolute;inset:auto 0 0 0;display:grid;gap:24px;
+  opacity:0;visibility:hidden;transition:opacity .6s ease,visibility 0s .6s;
+}
+.hero__copy.is-active{opacity:1;visibility:visible;transition:opacity .9s ease .25s}
+.hero__copy p{max-width:52ch}
+.hero__cta{margin-top:32px}
+.hero__bar{
+  position:absolute;inset:auto 0 0 0;z-index:3;
+}
+.hero__bar-inner{
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  max-width:var(--max);margin-inline:auto;padding:0 var(--gutter) 28px;
+}
+.hero__tabs{display:flex;gap:4px}
+.hero__tab{
+  display:flex;gap:10px;align-items:baseline;min-height:48px;padding:12px 16px 12px 0;
+  color:var(--graphite);text-transform:uppercase;font-size:12px;letter-spacing:.96px;
+  transition:color .2s ease;
+}
+.hero__tab b{font-weight:500}
+.hero__tab:hover{color:var(--steel)}
+.hero__tab[aria-selected="true"]{color:var(--white)}
+@media (max-width:767px){.hero__tab .t-name{display:none}}
+.hexbtn{width:48px;height:48px;position:relative;display:grid;place-items:center;flex:none;transition:color .2s ease}
+.hexbtn > svg.hex{position:absolute;inset:0;width:48px;height:48px}
+.hexbtn .ico{width:14px;height:14px;position:relative}
+.hexbtn:hover{color:var(--gold-text)}
+.hero__progress{position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(255,255,255,.15)}
+.hero__progress i{position:absolute;inset:0;background:var(--white);transform-origin:left;transform:scaleX(0)}
+.scroll-cue{display:none}
+@media (min-width:1024px){
+  .scroll-cue{display:flex;align-items:center;gap:12px;color:var(--ash)}
+  .scroll-cue i{width:1px;height:28px;background:var(--graphite);position:relative;overflow:hidden}
+  .scroll-cue i::after{content:"";position:absolute;left:0;right:0;top:-100%;height:100%;background:var(--white);animation:cue 2.2s ease-in-out infinite}
+}
+@keyframes cue{to{top:100%}}
+@media (prefers-reduced-motion:reduce){.scroll-cue i::after{animation:none}}
+
+/* =========================================================
+   MANIFEST
+   ========================================================= */
+.manifest{padding-block:clamp(96px,14vw,200px)}
+.manifest__text{
+  font-size:clamp(32px,4.8vw,64px);line-height:1.08;text-transform:uppercase;font-stretch:75%;
+  max-width:28ch;
+}
+.manifest__text .w{color:var(--shadow);transition:color .4s ease}
+.manifest__text .w.on{color:var(--white)}
+.stats{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  margin-top:clamp(64px,8vw,112px);border-top:1px solid var(--charcoal);
+}
+.stat{padding:32px 24px 0 0;display:grid;gap:8px}
+.stat strong{font-size:clamp(48px,6vw,80px);line-height:1;font-weight:400;font-stretch:75%}
+.stat strong small{font-size:.4em;color:var(--ash);margin-left:4px}
+.stat span{color:var(--ash)}
+@media (min-width:1024px){.stats{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:1023px){.stat{padding-bottom:32px}}
+
+/* =========================================================
+   USŁUGI
+   ========================================================= */
+.services{display:grid;gap:2px;background:var(--black)}
+@media (min-width:640px){.services{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1024px){.services{grid-template-columns:repeat(3,1fr)}}
+.service{
+  background:var(--charcoal);display:flex;flex-direction:column;
+  transition:background-color .25s ease;
+}
+.service:hover{background:#262626}
+.service__media{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--iron)}
+.service__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.service__media > *:not(.badge){filter:grayscale(.15) brightness(.82);transition:filter .4s ease}
+.service:hover .service__media > *:not(.badge){filter:grayscale(0) brightness(1)}
+.service__num{position:absolute;top:16px;left:16px;z-index:1}
+.service__body{display:flex;flex-direction:column;gap:16px;padding:28px 24px 24px;flex:1}
+.service__body p{color:var(--steel)}
+.service__meta{
+  display:flex;justify-content:space-between;gap:16px;margin-top:auto;
+  padding-top:20px;border-top:1px solid var(--graphite);
+}
+.service__meta dt{color:var(--ash)}
+.service__meta dd{margin:0;font-size:18px}
+.service__foot{display:flex;justify-content:space-between;align-items:center}
+
+/* =========================================================
+   STUDIO (heksagonalne oświetlenie)
+   ========================================================= */
+.studio{position:relative;background:var(--black);overflow:hidden}
+.studio__grid{display:grid}
+.studio__visual{position:relative;min-height:420px;aspect-ratio:4/3;overflow:hidden;background:var(--black)}
+.studio__visual .ceiling{position:absolute;inset:0;width:100%;height:100%}
+.studio__visual::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 40%,rgba(0,0,0,.7) 75%,#000 92%);
+}
+.studio__visual .reflect{z-index:2;
+  position:absolute;left:7%;bottom:9%;width:86%;aspect-ratio:3.2/1;height:auto;z-index:1;
+}
+.studio__copy{display:grid;gap:28px;align-content:center;padding:clamp(48px,6vw,96px) var(--gutter)}
+.specs{display:grid;border-top:1px solid var(--charcoal)}
+.specs div{display:flex;justify-content:space-between;gap:24px;padding:16px 0;border-bottom:1px solid var(--charcoal)}
+.specs dt{color:var(--ash)}
+.specs dd{margin:0;text-align:right}
+@media (min-width:1024px){
+  .studio__grid{grid-template-columns:1.15fr 1fr;min-height:760px}
+  .studio__visual{aspect-ratio:auto;height:100%}
+  .studio__copy{padding-right:max(var(--gutter),calc((100vw - var(--max))/2 + var(--gutter)))}
+}
+
+/* =========================================================
+   PRZED / PO
+   ========================================================= */
+.compare{
+  position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--iron);
+  --pos:50%;user-select:none;touch-action:pan-y;
+}
+@media (max-width:767px){.compare{aspect-ratio:4/3}}
+.compare__layer{position:absolute;inset:0}
+.compare__layer img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.compare__before{clip-path:inset(0 calc(100% - var(--pos)) 0 0)}
+/* „przed”: matowy, zszarzały lakier z hologramami (swirl marks) */
+.compare__before img,.compare__before canvas{filter:saturate(.35) brightness(.62) contrast(.78) blur(.4px)}
+.compare__before::after{
+  content:"";position:absolute;inset:0;mix-blend-mode:screen;opacity:.55;
+  background:
+    repeating-radial-gradient(circle at 62% 38%,rgba(255,255,255,.09) 0 1px,transparent 1px 7px),
+    repeating-radial-gradient(circle at 30% 70%,rgba(255,255,255,.06) 0 1px,transparent 1px 5px),
+    linear-gradient(rgba(140,140,140,.18),rgba(140,140,140,.18));
+}
+.compare__handle{
+  position:absolute;top:0;bottom:0;left:var(--pos);width:1px;background:var(--white);
+  pointer-events:none;z-index:2;
+}
+.compare__handle .hexbtn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:transparent}
+.compare__handle .hexbtn svg.hex path{fill:var(--black)}
+.compare__range{
+  position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;z-index:3;margin:0;
+}
+.compare:has(.compare__range:focus-visible) .compare__handle{outline:2px solid var(--gold);outline-offset:2px}
+.compare__tag{position:absolute;top:20px;z-index:2;pointer-events:none}
+.compare__tag--l{left:20px}
+.compare__tag--r{right:20px}
+.compare__tag span{background:rgba(0,0,0,.7);padding:8px 12px;display:inline-block}
+.projects{display:grid;gap:2px;margin-top:2px}
+@media (min-width:768px){.projects{grid-template-columns:repeat(3,1fr)}}
+.project{background:var(--iron);padding:24px;display:grid;gap:10px}
+.project p{color:var(--steel)}
+
+/* =========================================================
+   PAKIETY
+   ========================================================= */
+.plans{display:grid;gap:2px}
+@media (min-width:1024px){.plans{grid-template-columns:repeat(3,1fr)}}
+.plan{background:var(--iron);padding:clamp(28px,3vw,40px);display:flex;flex-direction:column;gap:24px}
+.plan--featured{background:var(--charcoal)}
+.plan__top{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:24px}
+.plan__price{display:flex;align-items:baseline;gap:8px;padding-bottom:24px;border-bottom:1px solid var(--graphite)}
+.plan__price strong{font-size:clamp(44px,4.4vw,54px);line-height:1;font-weight:400;font-stretch:75%}
+.plan__list{display:grid;gap:14px;color:var(--smoke)}
+.plan__list li{display:flex;gap:12px;align-items:flex-start}
+.plan__list li::before{
+  content:"";flex:none;width:10px;height:10px;margin-top:7px;
+  background:var(--white);clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%);
+}
+.plan__list li.off{color:var(--graphite)}
+.plan__list li.off::before{background:var(--graphite)}
+.plan .btn{margin-top:auto;width:100%}
+.plan__note{color:var(--ash);margin-top:24px}
+
+/* =========================================================
+   PROCES
+   ========================================================= */
+.steps{display:grid;border-top:1px solid var(--charcoal)}
+@media (min-width:768px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1024px){.steps{grid-template-columns:repeat(4,1fr)}}
+.step{padding:32px 24px 40px 0;display:grid;gap:16px;align-content:start;border-bottom:1px solid var(--charcoal)}
+@media (min-width:1024px){.step{border-bottom:0}.step + .step{padding-left:24px;border-left:1px solid var(--charcoal)}}
+.step__n{font-size:clamp(54px,6vw,80px);line-height:1;font-stretch:75%;color:var(--shadow)}
+.step p{color:var(--ash)}
+.step .label{color:var(--gold-text)}
+
+/* =========================================================
+   FAQ
+   ========================================================= */
+.faq__grid{display:grid;gap:40px}
+@media (min-width:1024px){.faq__grid{grid-template-columns:5fr 7fr;gap:80px}}
+.faq__list{border-top:1px solid var(--charcoal)}
+.faq__item{border-bottom:1px solid var(--charcoal)}
+.faq__item summary{
+  list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:24px;
+  padding:24px 0;font-size:18px;line-height:1.4;text-transform:uppercase;font-stretch:85%;
+  transition:color .2s ease;
+}
+.faq__item summary::-webkit-details-marker{display:none}
+.faq__item summary:hover{color:var(--steel)}
+.faq__item summary .pm{width:16px;height:16px;flex:none;position:relative}
+.faq__item summary .pm::before,.faq__item summary .pm::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:currentColor}
+.faq__item summary .pm::after{transform:rotate(90deg);transition:transform .25s ease}
+.faq__item[open] summary .pm::after{transform:rotate(0)}
+.faq__item .ans{padding:0 48px 28px 0;color:var(--ash);max-width:64ch}
+
+/* =========================================================
+   REZERWACJA
+   ========================================================= */
+.book{background:var(--iron)}
+.book__grid{display:grid;gap:56px}
+@media (min-width:1024px){.book__grid{grid-template-columns:5fr 7fr;gap:80px}}
+.contact-list{display:grid;gap:24px;margin-top:40px}
+.contact-list dt{color:var(--ash)}
+.contact-list dd{margin:4px 0 0;font-size:18px}
+.contact-list a{transition:color .2s ease}
+.contact-list a:hover{color:var(--link-blue)}
+.form{display:grid;gap:20px}
+.form__row{display:grid;gap:20px}
+@media (min-width:640px){.form__row{grid-template-columns:1fr 1fr}}
+.field{display:grid;gap:8px;align-content:start}
+.field label{color:var(--steel)}
+.field input,.field select,.field textarea{
+  width:100%;min-height:52px;padding:14px 16px;border-radius:0;
+  background:var(--black);color:var(--white);border:1px solid var(--graphite);
+  transition:border-color .2s ease;appearance:none;-webkit-appearance:none;
+}
+.field textarea{min-height:120px;resize:vertical}
+.field select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23fff' stroke-width='1.2'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;background-size:16px;padding-right:44px;
+}
+.field input::placeholder,.field textarea::placeholder{color:var(--graphite)}
+.field input:hover,.field select:hover,.field textarea:hover{border-color:var(--ash)}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--white)}
+.field input[type="date"]{color-scheme:dark}
+.field .err{color:var(--gold-text);font-size:13px;display:none}
+.field.invalid input,.field.invalid select,.field.invalid textarea{border-color:var(--gold-text)}
+.field.invalid .err{display:block}
+.check{display:flex;gap:14px;align-items:flex-start;color:var(--ash);font-size:14px;cursor:pointer}
+.check input{position:absolute;opacity:0;width:1px;height:1px}
+.check .box{flex:none;width:20px;height:20px;border:1px solid var(--graphite);display:grid;place-items:center;margin-top:1px;transition:border-color .2s ease,background-color .2s ease}
+.check .box svg{width:12px;height:12px;opacity:0;color:var(--black)}
+.check input:checked + .box{background:var(--white);border-color:var(--white)}
+.check input:checked + .box svg{opacity:1}
+.check input:focus-visible + .box{outline:2px solid var(--white);outline-offset:3px}
+.check.invalid .box{border-color:var(--gold-text)}
+.form__submit{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin-top:8px}
+.form__submit .btn{min-width:220px}
+.btn .spin{width:16px;height:16px;border:1px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin .8s linear infinite;display:none}
+.btn.loading .spin{display:block}
+@keyframes spin{to{transform:rotate(360deg)}}
+.success{display:none;gap:20px;padding:40px;background:var(--charcoal);align-content:start}
+.success.show{display:grid}
+.success svg{width:48px;height:48px;color:var(--gold)}
+
+/* =========================================================
+   STOPKA
+   ========================================================= */
+.footer{background:var(--iron);border-top:1px solid var(--charcoal);padding:64px 0 32px}
+.footer__grid{display:grid;gap:40px}
+@media (min-width:768px){.footer__grid{grid-template-columns:2fr 1fr 1fr 1fr}}
+.footer h3{color:var(--ash);margin-bottom:16px}
+.footer li + li{margin-top:10px}
+.footer a{transition:color .2s ease}
+.footer a:hover{color:var(--link-blue)}
+.footer__brand .logo{display:inline-flex}
+.footer__brand p{color:var(--ash);max-width:36ch;margin-top:20px}
+.footer__word{
+  font-size:clamp(96px,31vw,460px);line-height:.8;font-stretch:62%;text-transform:uppercase;
+  color:var(--charcoal);margin-top:64px;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;
+}
+.footer__bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;color:var(--ash);margin-top:32px;padding-top:24px;border-top:1px solid var(--charcoal)}
+
+/* =========================================================
+   POJAWIANIE SIĘ (tylko opacity, bez przesunięć)
+   ========================================================= */
+.reveal{opacity:0;transition:opacity 1s ease}
+.reveal.in{opacity:1}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transition:none}}
+</style>
+</head>
+<body>
+
+<!-- SVG symbols -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-hex" viewBox="0 0 48 48"><path d="M24 2.5 42.6 13.25v21.5L24 45.5 5.4 34.75v-21.5Z" fill="none" stroke="currentColor" stroke-width="1"/></symbol>
+    <symbol id="i-logo" viewBox="0 0 32 32"><path d="M16 2.5 27.7 9.25v13.5L16 29.5 4.3 22.75V9.25Z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M11.5 21.5v-11l9 11v-11" fill="none" stroke="#FFC000" stroke-width="1.6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3.5" y="5" width="17" height="15.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></g></symbol>
+    <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
+    <symbol id="i-close" viewBox="0 0 20 20"><path d="m4 4 12 12M16 4 4 16" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
+    <symbol id="i-check" viewBox="0 0 12 12"><path d="m2 6.5 2.5 2.5L10 3" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  </defs>
+</svg>
+
+<a href="#main" class="sr-only">Przejdź do treści</a>
+
+<!-- ============ NAWIGACJA ============ -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <button class="nav__menu" id="menuOpen" aria-controls="menu" aria-expanded="false">
+      <span class="burger" aria-hidden="true"><i></i><i></i></span>
+      <span class="nav__menu-text">Menu</span>
+      <span class="sr-only">Otwórz menu</span>
+    </button>
+    <a href="#top" class="logo" aria-label="NOCTIS, strona główna">
+      <svg aria-hidden="true"><use href="#i-logo"/></svg>
+      <span>NOCTIS</span>
+    </a>
+    <div class="nav__actions">
+      <a class="icon-btn" href="tel:+48500000000" aria-label="Zadzwoń: +48 500 000 000"><svg aria-hidden="true"><use href="#i-phone"/></svg></a>
+      <a class="icon-btn icon-btn--book" href="#rezerwacja" aria-label="Umów termin"><svg aria-hidden="true"><use href="#i-cal"/></svg></a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <div class="menu__top">
+    <button class="menu__close" id="menuClose"><svg aria-hidden="true"><use href="#i-close"/></svg>Zamknij</button>
+    <a href="#top" class="logo" data-close aria-label="NOCTIS, strona główna"><svg aria-hidden="true"><use href="#i-logo"/></svg><span>NOCTIS</span></a>
+  </div>
+  <div class="menu__body">
+    <nav aria-label="Główna">
+      <ul class="menu__list">
+        <li><a href="#uslugi" data-close><span>01</span>Usługi</a></li>
+        <li><a href="#studio" data-close><span>02</span>Studio</a></li>
+        <li><a href="#realizacje" data-close><span>03</span>Realizacje</a></li>
+        <li><a href="#pakiety" data-close><span>04</span>Pakiety</a></li>
+        <li><a href="#proces" data-close><span>05</span>Proces</a></li>
+        <li><a href="#faq" data-close><span>06</span>FAQ</a></li>
+        <li><a href="#rezerwacja" data-close><span>07</span>Kontakt</a></li>
+      </ul>
+    </nav>
+    <div class="menu__foot">
+      <div><p class="label">Adres</p><p>ul. Nocna 12, 30-001 Kraków</p></div>
+      <div><p class="label">Telefon</p><p><a href="tel:+48500000000">+48 500 000 000</a></p></div>
+      <div><p class="label">Godziny</p><p>Pn–Pt 8:00–18:00 · Sb 9:00–14:00</p></div>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top" aria-roledescription="karuzela" aria-label="Najważniejsze usługi">
+  <div class="hero__slide is-active" data-slide="0">
+    <div class="media" data-photo="img/hero-1.jpg"><canvas class="scene" data-scene="panel" data-seed="3" aria-hidden="true"></canvas></div>
+  </div>
+  <div class="hero__slide" data-slide="1">
+    <div class="media" data-photo="img/hero-2.jpg"><canvas class="scene" data-scene="ppf" data-seed="8" aria-hidden="true"></canvas></div>
+  </div>
+  <div class="hero__slide" data-slide="2">
+    <div class="media" data-photo="img/hero-3.jpg"><canvas class="scene" data-scene="beads" data-seed="5" aria-hidden="true"></canvas></div>
+  </div>
+  <div class="hero__shade"></div>
+
+  <div class="hero__content">
+    <div class="wrap-wide">
+      <div class="hero__text">
+        <div class="hero__copy is-active" data-copy="0">
+          <p class="kicker label"><b>Studio detailingu</b> Kraków</p>
+          <h1 class="display">Lakier<br>jak lustro</h1>
+          <p class="body-lg">Korekta lakieru, powłoki ceramiczne i folie PPF dla aut, które mają robić wrażenie. Jedno auto na raz. Zero kompromisów.</p>
+        </div>
+        <div class="hero__copy" data-copy="1" aria-hidden="true">
+          <p class="kicker label"><b>Folia PPF</b> Ochrona lakieru</p>
+          <p class="display" role="heading" aria-level="2">Ochrona<br>bez śladu</p>
+          <p class="body-lg">Przezroczysta, samoregenerująca się folia, która przyjmuje na siebie kamienie, owady i rysy z myjni. Lakier zostaje fabryczny.</p>
+        </div>
+        <div class="hero__copy" data-copy="2" aria-hidden="true">
+          <p class="kicker label"><b>Ceramika</b> Do 5 lat</p>
+          <p class="display" role="heading" aria-level="2">Blask<br>na lata</p>
+          <p class="body-lg">Twarda powłoka, po której woda spływa sama, a brud nie ma się czego trzymać. Głębia koloru, którą widać z daleka.</p>
+        </div>
+      </div>
+      <div class="btn-row hero__cta">
+        <a class="btn btn-gold" href="#rezerwacja">Umów bezpłatną wycenę <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-ghost" href="#uslugi">Zobacz usługi</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__bar">
+    <div class="hero__bar-inner">
+      <div class="hero__tabs" role="tablist" aria-label="Wybierz slajd">
+        <button class="hero__tab" role="tab" aria-selected="true" data-go="0"><b>01</b><span class="t-name">Korekta</span></button>
+        <button class="hero__tab" role="tab" aria-selected="false" data-go="1"><b>02</b><span class="t-name">Folia PPF</span></button>
+        <button class="hero__tab" role="tab" aria-selected="false" data-go="2"><b>03</b><span class="t-name">Ceramika</span></button>
+      </div>
+      <div style="display:flex;align-items:center;gap:32px">
+        <a href="#manifest" class="scroll-cue micro"><i></i>Przewiń</a>
+        <button class="hexbtn" id="heroPause" aria-label="Zatrzymaj pokaz slajdów">
+          <svg class="hex" aria-hidden="true"><use href="#i-hex"/></svg>
+          <svg class="ico" viewBox="0 0 14 14" aria-hidden="true"><g id="icoPause" fill="currentColor"><rect x="3" y="2" width="2" height="10"/><rect x="9" y="2" width="2" height="10"/></g><path id="icoPlay" d="M4 2v10l8-5z" fill="currentColor" style="display:none"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="hero__progress" aria-hidden="true"><i id="heroProgress"></i></div>
+  </div>
+</section>
+
+<!-- ============ MANIFEST ============ -->
+<section class="manifest" id="manifest" aria-label="O studiu">
+  <div class="wrap">
+    <p class="kicker label" style="margin-bottom:40px"><b>00</b> Manifest</p>
+    <p class="manifest__text" id="manifestText">Każde auto trafia do nas na wyłączność. Jedno stanowisko, pełne skupienie i światło, które nie wybacza żadnej rysy. Oddajemy samochód dopiero wtedy, gdy wygląda lepiej niż w dniu odbioru z salonu.</p>
+    <div class="stats">
+      <div class="stat"><strong>1</strong><span class="label">Auto na raz</span></div>
+      <div class="stat"><strong>1200<small>+</small></strong><span class="label">Oddanych aut</span></div>
+      <div class="stat"><strong>10<small>lat</small></strong><span class="label">Gwarancji na PPF</span></div>
+      <div class="stat"><strong>24<small>h</small></strong><span class="label">Odpowiedź na wycenę</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ USŁUGI ============ -->
+<section class="section" id="uslugi" aria-labelledby="uslugi-t" style="padding-top:0">
+  <div class="wrap-wide">
+    <div class="section-head">
+      <div style="display:grid;gap:24px">
+        <p class="kicker label"><b>01</b> Usługi</p>
+        <h2 class="d2" id="uslugi-t">Sześć sposobów<br>na perfekcję</h2>
+      </div>
+      <p class="body-lg">Każdą usługę zaczynamy od pomiaru grubości lakieru i oględzin w świetle inspekcyjnym. Wiesz dokładnie, za co płacisz i czego się spodziewać.</p>
+    </div>
+
+    <div class="services">
+      <article class="service reveal">
+        <div class="service__media" data-photo="img/usluga-1.jpg" data-alt="Polerowanie lakieru maszyną polerską"><canvas class="scene" data-scene="panel" data-seed="11" aria-hidden="true"></canvas><span class="service__num badge">01</span></div>
+        <div class="service__body">
+          <h3 class="h-feature">Korekta lakieru</h3>
+          <p>Usuwamy hologramy, zmatowienia i drobne rysy. Jedno lub wieloetapowe polerowanie, dobrane do twardości lakieru.</p>
+          <dl class="service__meta">
+            <div><dt class="label">Cena</dt><dd>od 1 500 zł</dd></div>
+            <div><dt class="label">Czas</dt><dd>2–3 dni</dd></div>
+          </dl>
+          <div class="service__foot"><a class="link" href="#rezerwacja" data-service="Korekta lakieru">Wybierz <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+        </div>
+      </article>
+      <article class="service reveal">
+        <div class="service__media" data-photo="img/usluga-2.jpg" data-alt="Krople wody na zabezpieczonym lakierze"><canvas class="scene" data-scene="beads" data-seed="17" aria-hidden="true"></canvas><span class="service__num badge">02</span></div>
+        <div class="service__body">
+          <h3 class="h-feature">Powłoka ceramiczna</h3>
+          <p>Twarda warstwa ochronna o trwałości od 3 do 5 lat. Efekt hydrofobowy, łatwiejsze mycie i głęboki połysk.</p>
+          <dl class="service__meta">
+            <div><dt class="label">Cena</dt><dd>od 2 200 zł</dd></div>
+            <div><dt class="label">Czas</dt><dd>2–4 dni</dd></div>
+          </dl>
+          <div class="service__foot"><a class="link" href="#rezerwacja" data-service="Powłoka ceramiczna">Wybierz <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+        </div>
+      </article>
+      <article class="service reveal">
+        <div class="service__media" data-photo="img/usluga-3.jpg" data-alt="Przód sportowego auta zabezpieczony folią"><canvas class="scene" data-scene="ppf" data-seed="4" aria-hidden="true"></canvas><span class="service__num badge">03</span></div>
+        <div class="service__body">
+          <h3 class="h-feature">Folia ochronna PPF</h3>
+          <p>Bezbarwna lub matowa folia poliuretanowa. Samoregenerujące się zarysowania i ochrona przed odpryskami.</p>
+          <dl class="service__meta">
+            <div><dt class="label">Cena</dt><dd>od 3 900 zł</dd></div>
+            <div><dt class="label">Czas</dt><dd>3–5 dni</dd></div>
+          </dl>
+          <div class="service__foot"><a class="link" href="#rezerwacja" data-service="Folia ochronna PPF">Wybierz <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+        </div>
+      </article>
+      <article class="service reveal">
+        <div class="service__media" data-photo="img/usluga-4.jpg" data-alt="Skórzane wnętrze samochodu"><canvas class="scene" data-scene="leather" data-seed="2" aria-hidden="true"></canvas><span class="service__num badge">04</span></div>
+        <div class="service__body">
+          <h3 class="h-feature">Detailing wnętrza</h3>
+          <p>Czyszczenie i impregnacja skóry, pranie tapicerki, ozonowanie. Kabina pachnie i wygląda jak nowa.</p>
+          <dl class="service__meta">
+            <div><dt class="label">Cena</dt><dd>od 900 zł</dd></div>
+            <div><dt class="label">Czas</dt><dd>1–2 dni</dd></div>
+          </dl>
+          <div class="service__foot"><a class="link" href="#rezerwacja" data-service="Detailing wnętrza">Wybierz <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+        </div>
+      </article>
+      <article class="service reveal">
+        <div class="service__media" data-photo="img/usluga-5.jpg" data-alt="Mycie auta aktywną pianą"><canvas class="scene" data-scene="foam" data-seed="9" aria-hidden="true"></canvas><span class="service__num badge">05</span></div>
+        <div class="service__body">
+          <h3 class="h-feature">Mycie detailingowe</h3>
+          <p>Mycie metodą dwóch wiader, dekontaminacja chemiczna i glinkowanie. Bezpieczne dla każdej powłoki.</p>
+          <dl class="service__meta">
+            <div><dt class="label">Cena</dt><dd>od 350 zł</dd></div>
+            <div><dt class="label">Czas</dt><dd>4–6 godzin</dd></div>
+          </dl>
+          <div class="service__foot"><a class="link" href="#rezerwacja" data-service="Mycie detailingowe">Wybierz <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+        </div>
+      </article>
+      <article class="service reveal">
+        <div class="service__media" data-photo="img/usluga-6.jpg" data-alt="Felga samochodu z bliska"><canvas class="scene" data-scene="wheel" data-seed="6" aria-hidden="true"></canvas><span class="service__num badge">06</span></div>
+        <div class="service__body">
+          <h3 class="h-feature">Felgi i zaciski</h3>
+          <p>Dokładne czyszczenie felg z obu stron, ceramika na felgi i zaciski hamulcowe. Mniej pyłu, łatwiejsze mycie.</p>
+          <dl class="service__meta">
+            <div><dt class="label">Cena</dt><dd>od 600 zł</dd></div>
+            <div><dt class="label">Czas</dt><dd>1 dzień</dd></div>
+          </dl>
+          <div class="service__foot"><a class="link" href="#rezerwacja" data-service="Felgi i zaciski">Wybierz <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STUDIO ============ -->
+<section class="studio" id="studio" aria-labelledby="studio-t">
+  <div class="studio__grid">
+    <div class="studio__visual" aria-hidden="true">
+      <canvas class="ceiling scene" data-scene="hex"></canvas>
+      <canvas class="reflect scene" data-scene="car"></canvas>
+    </div>
+    <div class="studio__copy">
+      <p class="kicker label"><b>02</b> Studio</p>
+      <h2 class="h-section" id="studio-t">Światło, które<br>widzi wszystko</h2>
+      <p class="body-lg">Heksagonalne oświetlenie inspekcyjne odbija się w lakierze jak siatka. Każda rysa, każdy hologram i każda nierówność są widoczne od razu. Dzięki temu nic nie ucieka naszej uwadze.</p>
+      <dl class="specs">
+        <div><dt class="label">Oświetlenie</dt><dd>Heksagonalne LED · 6500 K</dd></div>
+        <div><dt class="label">Temperatura</dt><dd>Stałe 20–22°C</dd></div>
+        <div><dt class="label">Pomiar lakieru</dt><dd>Każdy element karoserii</dd></div>
+        <div><dt class="label">Bezpieczeństwo</dt><dd>Monitoring i ubezpieczenie OC</dd></div>
+      </dl>
+      <div class="btn-row"><a class="btn btn-ghost" href="#proces">Jak pracujemy</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REALIZACJE ============ -->
+<section class="section" id="realizacje" aria-labelledby="real-t">
+  <div class="wrap-wide">
+    <div class="section-head">
+      <div style="display:grid;gap:24px">
+        <p class="kicker label"><b>03</b> Realizacje</p>
+        <h2 class="d2" id="real-t">Przed. Po.</h2>
+      </div>
+      <p class="body-lg">Przesuń suwak, żeby zobaczyć różnicę po wieloetapowej korekcie i powłoce ceramicznej. Hologramy i matowy nalot znikają, kolor odzyskuje głębię.</p>
+    </div>
+
+    <div class="compare reveal" id="compare">
+      <div class="compare__layer compare__after" data-photo="img/porownanie.jpg" data-alt="Lakier po korekcie: głęboki połysk i czyste odbicia"><canvas class="scene" data-scene="panel" data-seed="21" role="img" aria-label="Lakier po korekcie: głęboki połysk i czyste odbicia"></canvas></div>
+      <div class="compare__layer compare__before" data-photo="img/porownanie.jpg" aria-hidden="true"><canvas class="scene" data-scene="panel" data-seed="21"></canvas></div>
+      <div class="compare__tag compare__tag--l"><span class="label">Przed</span></div>
+      <div class="compare__tag compare__tag--r"><span class="label">Po</span></div>
+      <div class="compare__handle">
+        <span class="hexbtn" aria-hidden="true">
+          <svg class="hex"><use href="#i-hex"/></svg>
+          <svg class="ico" viewBox="0 0 14 14"><path d="M5 3 1 7l4 4M9 3l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+        </span>
+      </div>
+      <input class="compare__range" id="compareRange" type="range" min="0" max="100" value="50" aria-label="Porównanie przed i po: przesuń, aby odsłonić">
+    </div>
+
+    <div class="projects">
+      <div class="project reveal"><p class="label gold-text">Korekta + ceramika</p><h3 class="h-feature">Coupé GT · Czarny metalik</h3><p>3 etapy polerowania, powłoka na 5 lat. 4 dni.</p></div>
+      <div class="project reveal"><p class="label gold-text">Full body PPF</p><h3 class="h-feature">SUV · Szary mat</h3><p>Matowa folia na całe nadwozie, ceramika na felgi. 6 dni.</p></div>
+      <div class="project reveal"><p class="label gold-text">Wnętrze</p><h3 class="h-feature">Limuzyna · Beżowa skóra</h3><p>Czyszczenie i impregnacja skóry, ozonowanie. 1 dzień.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAKIETY ============ -->
+<section class="section" id="pakiety" aria-labelledby="pak-t" style="padding-top:0">
+  <div class="wrap-wide">
+    <div class="section-head">
+      <div style="display:grid;gap:24px">
+        <p class="kicker label"><b>04</b> Pakiety</p>
+        <h2 class="d2" id="pak-t">Wybierz poziom</h2>
+      </div>
+      <p class="body-lg">Gotowe zestawy usług w lepszej cenie niż osobno. Ostateczną wycenę podajemy po bezpłatnych oględzinach, bo każdy lakier jest inny.</p>
+    </div>
+
+    <div class="plans">
+      <article class="plan reveal">
+        <div class="plan__top"><h3 class="h-sub">Start</h3></div>
+        <p class="muted">Odświeżenie i ochrona na sezon.</p>
+        <div class="plan__price"><span class="label muted">od</span><strong>890</strong><span class="label muted">zł</span></div>
+        <ul class="plan__list">
+          <li>Mycie detailingowe i dekontaminacja</li>
+          <li>Polerowanie jednoetapowe (lekkie)</li>
+          <li>Wosk lub sealant do 6 miesięcy</li>
+          <li>Odkurzanie i czyszczenie wnętrza</li>
+          <li class="off">Powłoka ceramiczna</li>
+          <li class="off">Folia PPF</li>
+        </ul>
+        <a class="btn btn-ghost" href="#rezerwacja" data-service="Pakiet Start">Wybierz Start</a>
+      </article>
+      <article class="plan plan--featured reveal">
+        <div class="plan__top"><h3 class="h-sub">Signature</h3><span class="badge">Najczęściej wybierany</span></div>
+        <p class="muted">Pełna korekta i ceramika na lata.</p>
+        <div class="plan__price"><span class="label muted">od</span><strong>3 400</strong><span class="label muted">zł</span></div>
+        <ul class="plan__list">
+          <li>Mycie detailingowe i dekontaminacja</li>
+          <li>Korekta lakieru dwuetapowa</li>
+          <li>Powłoka ceramiczna na 3 lata</li>
+          <li>Ceramika na szyby i felgi</li>
+          <li>Detailing wnętrza z impregnacją</li>
+          <li class="off">Folia PPF</li>
+        </ul>
+        <a class="btn btn-gold" href="#rezerwacja" data-service="Pakiet Signature">Wybierz Signature <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </article>
+      <article class="plan reveal">
+        <div class="plan__top"><h3 class="h-sub">Obsidian</h3></div>
+        <p class="muted">Maksimum ochrony dla aut wyjątkowych.</p>
+        <div class="plan__price"><span class="label muted">od</span><strong>8 900</strong><span class="label muted">zł</span></div>
+        <ul class="plan__list">
+          <li>Korekta lakieru wieloetapowa</li>
+          <li>Folia PPF na cały przód</li>
+          <li>Powłoka ceramiczna na 5 lat</li>
+          <li>Ceramika na felgi i zaciski</li>
+          <li>Pełny detailing wnętrza</li>
+          <li>Przegląd powłoki po 12 miesiącach</li>
+        </ul>
+        <a class="btn btn-ghost" href="#rezerwacja" data-service="Pakiet Obsidian">Wybierz Obsidian</a>
+      </article>
+    </div>
+    <p class="plan__note micro">Ceny brutto dla aut osobowych klasy średniej. Duże SUV-y i auta wymagające dodatkowej pracy wyceniamy indywidualnie.</p>
+  </div>
+</section>
+
+<!-- ============ PROCES ============ -->
+<section class="section" id="proces" aria-labelledby="proc-t" style="padding-top:0">
+  <div class="wrap-wide">
+    <div class="section-head">
+      <div style="display:grid;gap:24px">
+        <p class="kicker label"><b>05</b> Proces</p>
+        <h2 class="d2" id="proc-t">Od oględzin<br>do odbioru</h2>
+      </div>
+      <p class="body-lg">Cztery kroki, bez niespodzianek. Na każdym etapie dostajesz zdjęcia i informację, co dzieje się z Twoim autem.</p>
+    </div>
+    <ol class="steps">
+      <li class="step reveal"><span class="step__n">01</span><p class="label">30 minut · bezpłatnie</p><h3 class="h-feature">Oględziny</h3><p>Sprawdzamy lakier w świetle inspekcyjnym i mierzymy jego grubość. Dostajesz wycenę i plan prac.</p></li>
+      <li class="step reveal"><span class="step__n">02</span><p class="label">Dzień 1</p><h3 class="h-feature">Przygotowanie</h3><p>Mycie, dekontaminacja, glinkowanie i oklejenie elementów, które muszą zostać nietknięte.</p></li>
+      <li class="step reveal"><span class="step__n">03</span><p class="label">Dzień 1–5</p><h3 class="h-feature">Realizacja</h3><p>Korekta, aplikacja powłok lub folii. Pracujemy w stałej temperaturze, bez pośpiechu.</p></li>
+      <li class="step reveal"><span class="step__n">04</span><p class="label">Odbiór</p><h3 class="h-feature">Raport i odbiór</h3><p>Oglądamy auto razem. Dostajesz raport ze zdjęciami, certyfikat gwarancji i instrukcję pielęgnacji.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section" id="faq" aria-labelledby="faq-t" style="padding-top:0">
+  <div class="wrap-wide faq__grid">
+    <div style="display:grid;gap:24px;align-content:start">
+      <p class="kicker label"><b>06</b> FAQ</p>
+      <h2 class="d2" id="faq-t">Pytania</h2>
+      <p class="body-lg">Nie ma tu Twojego pytania? Zadzwoń. Odpowiadamy od poniedziałku do soboty.</p>
+      <div><a class="link" href="tel:+48500000000">+48 500 000 000</a></div>
+    </div>
+    <div class="faq__list">
+      <details class="faq__item"><summary>Czym różni się ceramika od folii PPF?<span class="pm" aria-hidden="true"></span></summary><p class="ans">Ceramika to twarda, cienka warstwa, która daje połysk i ułatwia mycie, ale nie zatrzyma kamienia. Folia PPF jest gruba i elastyczna, więc przyjmuje uderzenia i odpryski. Najlepszy efekt daje połączenie: folia na przodzie, ceramika na reszcie auta i na samej folii.</p></details>
+      <details class="faq__item"><summary>Jak długo auto zostaje w studiu?<span class="pm" aria-hidden="true"></span></summary><p class="ans">Od kilku godzin przy myciu detailingowym do 5–6 dni przy folii na całe nadwozie. Dokładny czas podajemy przy wycenie i trzymamy się go.</p></details>
+      <details class="faq__item"><summary>Czy korekta lakieru go nie osłabia?<span class="pm" aria-hidden="true"></span></summary><p class="ans">Przed polerowaniem mierzymy grubość lakieru na każdym elemencie. Zbieramy tylko tyle, ile trzeba, zwykle kilka mikronów. Jeśli lakier jest za cienki, mówimy o tym wprost i proponujemy bezpieczniejsze rozwiązanie.</p></details>
+      <details class="faq__item"><summary>Jak dbać o auto po powłoce ceramicznej?<span class="pm" aria-hidden="true"></span></summary><p class="ans">Pierwsze 7 dni bez mycia. Później mycie ręczne szamponem o neutralnym pH, bez myjni szczotkowych. Przy odbiorze dostajesz instrukcję i zestaw startowy do pielęgnacji.</p></details>
+      <details class="faq__item"><summary>Czy dajecie gwarancję?<span class="pm" aria-hidden="true"></span></summary><p class="ans">Tak. Powłoki ceramiczne mają gwarancję od 3 do 5 lat, folie PPF do 10 lat. Gwarancję potwierdzamy certyfikatem z numerem auta.</p></details>
+      <details class="faq__item"><summary>Czy mogę zostawić auto i wrócić po odbiór?<span class="pm" aria-hidden="true"></span></summary><p class="ans">Oczywiście. Studio jest monitorowane i ubezpieczone. Na życzenie odbieramy i odwozimy auto na lawecie w promieniu 50 km.</p></details>
+      <details class="faq__item"><summary>Jak wygląda płatność?<span class="pm" aria-hidden="true"></span></summary><p class="ans">Przy usługach powyżej 3 000 zł prosimy o zadatek 20%. Resztę płacisz przy odbiorze: kartą, przelewem lub gotówką. Wystawiamy faktury VAT.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REZERWACJA ============ -->
+<section class="section book" id="rezerwacja" aria-labelledby="book-t">
+  <div class="wrap-wide book__grid">
+    <div>
+      <p class="kicker label" style="margin-bottom:24px"><b>07</b> Kontakt</p>
+      <h2 class="d2" id="book-t">Umów<br>oględziny</h2>
+      <p class="body-lg" style="margin-top:24px;max-width:42ch">Zostaw kontakt, a oddzwonimy w ciągu 24 godzin roboczych. Oględziny i wycena są bezpłatne i do niczego nie zobowiązują.</p>
+      <dl class="contact-list">
+        <div><dt class="label">Adres</dt><dd>ul. Nocna 12, 30-001 Kraków</dd></div>
+        <div><dt class="label">Telefon</dt><dd><a href="tel:+48500000000">+48 500 000 000</a></dd></div>
+        <div><dt class="label">E-mail</dt><dd><a href="mailto:studio@noctis.example">studio@noctis.example</a></dd></div>
+        <div><dt class="label">Godziny</dt><dd>Pn–Pt 8:00–18:00 · Sb 9:00–14:00</dd></div>
+      </dl>
+    </div>
+
+    <div>
+      <form class="form" id="bookForm" novalidate>
+        <div class="form__row">
+          <div class="field"><label class="label" for="f-name">Imię i nazwisko</label><input id="f-name" name="name" autocomplete="name" required placeholder="Jan Kowalski"><span class="err" id="e-name">Wpisz imię i nazwisko.</span></div>
+          <div class="field"><label class="label" for="f-phone">Telefon</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="+48 000 000 000"><span class="err" id="e-phone">Podaj numer telefonu (min. 9 cyfr).</span></div>
+        </div>
+        <div class="form__row">
+          <div class="field"><label class="label" for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="jan@przyklad.pl"><span class="err" id="e-email">Sprawdź adres e-mail.</span></div>
+          <div class="field"><label class="label" for="f-car">Marka i model</label><input id="f-car" name="car" required placeholder="np. Audi RS6, 2022"><span class="err" id="e-car">Wpisz markę i model auta.</span></div>
+        </div>
+        <div class="form__row">
+          <div class="field"><label class="label" for="f-service">Usługa</label>
+            <select id="f-service" name="service" required>
+              <option value="">Wybierz usługę</option>
+              <optgroup label="Usługi">
+                <option>Korekta lakieru</option>
+                <option>Powłoka ceramiczna</option>
+                <option>Folia ochronna PPF</option>
+                <option>Detailing wnętrza</option>
+                <option>Mycie detailingowe</option>
+                <option>Felgi i zaciski</option>
+              </optgroup>
+              <optgroup label="Pakiety">
+                <option>Pakiet Start</option>
+                <option>Pakiet Signature</option>
+                <option>Pakiet Obsidian</option>
+              </optgroup>
+              <option>Nie wiem, doradźcie</option>
+            </select>
+            <span class="err" id="e-service">Wybierz usługę.</span>
+          </div>
+          <div class="field"><label class="label" for="f-date">Preferowany termin</label><input id="f-date" name="date" type="date"><span class="err" id="e-date">Wybierz datę od jutra.</span></div>
+        </div>
+        <div class="field"><label class="label" for="f-msg">Wiadomość (opcjonalnie)</label><textarea id="f-msg" name="msg" placeholder="Co chcesz poprawić? Rysy, odpryski, matowy lakier…"></textarea></div>
+        <label class="check" id="c-consent"><input type="checkbox" name="consent" id="f-consent" required><span class="box"><svg aria-hidden="true"><use href="#i-check"/></svg></span><span>Zgadzam się na kontakt w sprawie wyceny i przetwarzanie moich danych w tym celu.</span></label>
+        <div class="form__submit">
+          <p class="micro muted" id="formStatus" role="status" aria-live="polite"></p>
+          <button class="btn btn-gold" type="submit" id="submitBtn"><span class="spin" aria-hidden="true"></span><span class="txt">Wyślij zgłoszenie</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        </div>
+      </form>
+      <div class="success" id="success" tabindex="-1">
+        <svg aria-hidden="true"><use href="#i-hex"/></svg>
+        <h3 class="h-sub">Zgłoszenie przyjęte</h3>
+        <p class="body-lg">Dziękujemy. Oddzwonimy w ciągu 24 godzin roboczych, żeby ustalić termin oględzin.</p>
+        <div><button class="btn btn-ghost" type="button" id="againBtn">Wyślij kolejne</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ STOPKA ============ -->
+<footer class="footer">
+  <div class="wrap-wide">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="#top" class="logo" aria-label="NOCTIS, strona główna"><svg aria-hidden="true"><use href="#i-logo"/></svg><span>NOCTIS</span></a>
+        <p>Studio detailingu premium. Korekta lakieru, ceramika, folie PPF i detailing wnętrz.</p>
+      </div>
+      <div><h3 class="label">Usługi</h3><ul><li><a href="#uslugi">Korekta lakieru</a></li><li><a href="#uslugi">Powłoki ceramiczne</a></li><li><a href="#uslugi">Folie PPF</a></li><li><a href="#uslugi">Wnętrza</a></li></ul></div>
+      <div><h3 class="label">Studio</h3><ul><li><a href="#studio">Oświetlenie</a></li><li><a href="#realizacje">Realizacje</a></li><li><a href="#pakiety">Pakiety</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+      <div><h3 class="label">Kontakt</h3><ul><li><a href="tel:+48500000000">+48 500 000 000</a></li><li><a href="mailto:studio@noctis.example">studio@noctis.example</a></li><li>ul. Nocna 12, Kraków</li></ul></div>
+    </div>
+    <p class="footer__word" aria-hidden="true">Noctis</p>
+    <div class="footer__bottom micro">
+      <span>© <span id="year">2026</span> NOCTIS Studio Detailingu</span>
+      <span>Dane kontaktowe na stronie są przykładowe</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+  /* ---------- własne zdjęcia ----------
+     Wrzuć plik do folderu img/ (np. img/hero-1.jpg), a zastąpi grafikę rysowaną w przeglądarce. */
+  $$('[data-photo]').forEach(box => {
+    const im = new Image();
+    im.onload = () => {
+      im.alt = box.dataset.alt || '';
+      if (!im.alt) im.setAttribute('aria-hidden', 'true');
+      box.appendChild(im);
+      box.querySelector('canvas.scene')?.setAttribute('hidden', '');
+    };
+    im.src = box.dataset.photo;
+  });
+
+  /* ---------- grafiki rysowane (canvas) ---------- */
+  const rng = seed => { let s = (seed * 9301 + 49297) % 233280 || 1; return () => (s = (s * 16807) % 2147483647) / 2147483647; };
+  const W = 'rgba(255,255,255,';
+
+  function hexGrid(ctx, w, h, R, o = {}) {
+    const r = o.size || Math.max(48, w / 11);
+    const hw = Math.sqrt(3) * r, vh = 1.5 * r, gap = r * (o.gap ?? .12);
+    for (let row = -1; row * vh < h + r; row++) {
+      for (let col = -1; col * hw < w + hw; col++) {
+        const cx = col * hw + (row % 2 ? hw / 2 : 0), cy = row * vh;
+        for (let k = 0; k < 6; k++) {
+          const a1 = Math.PI / 3 * k - Math.PI / 2, a2 = a1 + Math.PI / 3;
+          const x1 = cx + r * Math.cos(a1), y1 = cy + r * Math.sin(a1);
+          const x2 = cx + r * Math.cos(a2), y2 = cy + r * Math.sin(a2);
+          const len = Math.hypot(x2 - x1, y2 - y1), ux = (x2 - x1) / len, uy = (y2 - y1) / len;
+          const fade = o.fade ? Math.max(0, 1 - cy / h) : 1;
+          ctx.strokeStyle = W + (o.alpha ?? .9) * fade * (.55 + R() * .45) + ')';
+          ctx.lineWidth = o.line || Math.max(2, r * .07);
+          ctx.beginPath();
+          ctx.moveTo(x1 + ux * gap, y1 + uy * gap);
+          ctx.lineTo(x2 - ux * gap, y2 - uy * gap);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  // miękka smuga światła: kilka coraz węższych pociągnięć zamiast rozmycia (działa też w Safari)
+  function streak(ctx, path, width, alpha, grad) {
+    ctx.strokeStyle = grad; ctx.lineCap = 'round';
+    for (let k = 0; k < 7; k++) {
+      ctx.globalAlpha = alpha * .07;
+      ctx.lineWidth = width * (1 - k / 7);
+      path(); ctx.stroke();
+    }
+    ctx.globalAlpha = alpha;
+    ctx.lineWidth = Math.max(.8, width * .045);
+    path(); ctx.stroke();
+    ctx.globalAlpha = 1;
+  }
+  function lightGrad(ctx, w, peak, a) {
+    const g = ctx.createLinearGradient(0, 0, w, 0);
+    g.addColorStop(0, W + '0)');
+    g.addColorStop(Math.max(0, peak - .3), W + a * .25 + ')');
+    g.addColorStop(peak, W + a + ')');
+    g.addColorStop(Math.min(1, peak + .32), W + a * .2 + ')');
+    g.addColorStop(1, W + '0)');
+    return g;
+  }
+
+  const scenes = {
+    // lakier: smugi światła wzdłuż przetłoczeń karoserii
+    panel(ctx, w, h, R) {
+      const bg = ctx.createLinearGradient(0, 0, w, h);
+      bg.addColorStop(0, '#030303'); bg.addColorStop(.42, '#141414'); bg.addColorStop(.58, '#080808'); bg.addColorStop(1, '#000');
+      ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h);
+      const bend = .5 + R() * .3;
+      const curve = (y0, amp) => () => {
+        ctx.beginPath(); ctx.moveTo(-w * .1, y0 + amp);
+        ctx.bezierCurveTo(w * .28, y0 - amp * bend, w * .62, y0 - amp * .35, w * 1.1, y0 + amp * .55);
+      };
+      // przetłoczenie: ciemniejsza dolna część panelu
+      const crease = h * (.52 + R() * .1), camp = h * .14;
+      ctx.save(); curve(crease, camp)(); ctx.lineTo(w * 1.1, h * 1.1); ctx.lineTo(-w * .1, h * 1.1); ctx.closePath();
+      const lower = ctx.createLinearGradient(0, crease - camp, 0, h);
+      lower.addColorStop(0, '#0d0d0d'); lower.addColorStop(1, '#000'); ctx.fillStyle = lower; ctx.fill(); ctx.restore();
+      for (let i = 0; i < 6; i++) {
+        const y0 = h * (.08 + i * .16 + R() * .05), amp = h * (.08 + R() * .1);
+        streak(ctx, curve(y0, amp), 20 + R() * 70, .35 + R() * .55, lightGrad(ctx, w, .25 + R() * .5, 1));
+      }
+      streak(ctx, curve(crease, camp), 26, 1, lightGrad(ctx, w, .45 + R() * .2, 1));
+    },
+    // folia PPF: lakier + mikrostruktura heksagonalna po jednej stronie krawędzi folii
+    ppf(ctx, w, h, R) {
+      scenes.panel(ctx, w, h, R);
+      const x0 = w * (.5 + R() * .15);
+      ctx.save(); ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(x0 + h * .2, 0); ctx.lineTo(x0 - h * .2, h); ctx.lineTo(0, h); ctx.closePath(); ctx.clip();
+      ctx.fillStyle = 'rgba(255,255,255,.025)'; ctx.fillRect(0, 0, w, h);
+      hexGrid(ctx, w, h, R, { size: Math.max(10, w / 70), alpha: .12, line: 1, gap: .05 });
+      ctx.restore();
+      ctx.strokeStyle = W + '.55)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(x0 + h * .2, 0); ctx.lineTo(x0 - h * .2, h); ctx.stroke();
+    },
+    // ceramika: krople wody na czarnym lakierze
+    beads(ctx, w, h, R) {
+      const lx = w * .68, ly = h * .3;
+      ctx.fillStyle = '#000'; ctx.fillRect(0, 0, w, h);
+      const glow = ctx.createRadialGradient(lx, ly, 0, lx, ly, Math.max(w, h) * .7);
+      glow.addColorStop(0, '#2b2b2b'); glow.addColorStop(.5, '#0e0e0e'); glow.addColorStop(1, '#000');
+      ctx.fillStyle = glow; ctx.fillRect(0, 0, w, h);
+      const n = Math.min(1100, Math.round(w * h / 700));
+      for (let i = 0; i < n; i++) {
+        const x = R() * w, y = R() * h, r = 1.2 + Math.pow(R(), 3) * Math.max(10, w / 70);
+        const L = Math.max(0, 1 - Math.hypot(x - lx, y - ly) / (Math.max(w, h) * .75));
+        // cień kropli
+        ctx.fillStyle = 'rgba(0,0,0,.55)';
+        ctx.beginPath(); ctx.arc(x + r * .12, y + r * .15, r, 0, Math.PI * 2); ctx.fill();
+        // załamane światło: miękka poświata w dolnej, odwróconej od lampy części
+        const ang = Math.atan2(y - ly, x - lx), ox = Math.cos(ang) * r * .45, oy = Math.sin(ang) * r * .45;
+        const glowIn = ctx.createRadialGradient(x + ox, y + oy, 0, x + ox, y + oy, r * .9);
+        glowIn.addColorStop(0, W + (.06 + .32 * L) + ')'); glowIn.addColorStop(1, W + '0)');
+        ctx.fillStyle = '#060606'; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = glowIn; ctx.fill();
+        ctx.strokeStyle = W + (.04 + .18 * L) + ')'; ctx.lineWidth = .5; ctx.stroke();
+        // refleks od lampy: mała, wydłużona plamka po stronie światła
+        if (r > 2) {
+          ctx.save(); ctx.translate(x - ox * .9, y - oy * .9); ctx.rotate(ang + Math.PI / 2);
+          ctx.fillStyle = W + (.25 + .7 * L) + ')';
+          ctx.beginPath(); ctx.ellipse(0, 0, r * .28, r * .12, 0, 0, Math.PI * 2); ctx.fill();
+          ctx.restore();
+        }
+      }
+    },
+    // piana aktywna
+    foam(ctx, w, h, R) {
+      const bg = ctx.createLinearGradient(0, 0, 0, h);
+      bg.addColorStop(0, '#1a1a1a'); bg.addColorStop(1, '#000');
+      ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h);
+      const haze = ctx.createLinearGradient(0, 0, 0, h * .8);
+      haze.addColorStop(0, W + '.22)'); haze.addColorStop(1, W + '0)');
+      ctx.fillStyle = haze; ctx.fillRect(0, 0, w, h);
+      // spływające strużki
+      for (let i = 0; i < 40; i++) {
+        const x = R() * w, y = h * (.3 + R() * .3), l = h * (.1 + R() * .5);
+        const g = ctx.createLinearGradient(0, y, 0, y + l); g.addColorStop(0, W + '.25)'); g.addColorStop(1, W + '0)');
+        ctx.strokeStyle = g; ctx.lineWidth = .6 + R() * 1.6;
+        ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + (R() - .5) * 6, y + l); ctx.stroke();
+      }
+      const n = Math.min(1600, Math.round(w * h / 300));
+      for (let i = 0; i < n; i++) {
+        const y = Math.pow(R(), 1.8) * h * .8, x = R() * w;
+        const r = 1 + Math.pow(R(), 2.5) * Math.max(8, w / 45);
+        ctx.fillStyle = W + (.03 + R() * .08) + ')';
+        ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = W + (.15 + R() * .35) + ')'; ctx.lineWidth = .7; ctx.stroke();
+        ctx.fillStyle = W + '.7)';
+        ctx.beginPath(); ctx.arc(x - r * .4, y - r * .4, Math.max(.4, r * .12), 0, Math.PI * 2); ctx.fill();
+      }
+    },
+    // pikowana skóra
+    leather(ctx, w, h, R) {
+      ctx.fillStyle = '#040404'; ctx.fillRect(0, 0, w, h);
+      const s = Math.max(w, h) / 6.5, d = Math.hypot(w, h);
+      ctx.save(); ctx.translate(w / 2, h / 2); ctx.rotate(Math.PI / 4);
+      for (let i = -Math.ceil(d / s); i <= Math.ceil(d / s); i++) {
+        for (let j = -Math.ceil(d / s); j <= Math.ceil(d / s); j++) {
+          const x = i * s, y = j * s;
+          const g = ctx.createRadialGradient(x + s * .4, y + s * .4, s * .05, x + s * .5, y + s * .5, s * .75);
+          g.addColorStop(0, '#2e2e2e'); g.addColorStop(.6, '#141414'); g.addColorStop(1, '#030303');
+          ctx.fillStyle = g; ctx.fillRect(x, y, s, s);
+          ctx.setLineDash([s * .045, s * .035]);
+          ctx.strokeStyle = W + '.28)'; ctx.lineWidth = 1;
+          ctx.strokeRect(x + s * .07, y + s * .07, s * .86, s * .86);
+          ctx.setLineDash([]);
+          ctx.fillStyle = 'rgba(0,0,0,.65)';
+          for (let a = 1; a < 6; a++) for (let b = 1; b < 6; b++) {
+            ctx.beginPath(); ctx.arc(x + s * (a / 6), y + s * (b / 6), Math.max(.8, s * .012), 0, Math.PI * 2); ctx.fill();
+          }
+        }
+      }
+      ctx.restore();
+      const v = ctx.createRadialGradient(w * .35, h * .25, 0, w * .35, h * .25, d * .75);
+      v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,.9)');
+      ctx.fillStyle = v; ctx.fillRect(0, 0, w, h);
+    },
+    // felga
+    wheel(ctx, w, h, R) {
+      ctx.fillStyle = '#000'; ctx.fillRect(0, 0, w, h);
+      const cx = w * .6, cy = h * .56, R0 = Math.min(w, h) * .72, R1 = R0 * .74;
+      ctx.fillStyle = '#0a0a0a'; ctx.beginPath(); ctx.arc(cx, cy, R0, 0, Math.PI * 2); ctx.fill();
+      for (let k = 0; k < 4; k++) { ctx.strokeStyle = W + '.05)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(cx, cy, R1 + (R0 - R1) * (.2 + k * .2), 0, Math.PI * 2); ctx.stroke(); }
+      const lip = ctx.createLinearGradient(cx - R1, cy - R1, cx + R1, cy + R1);
+      lip.addColorStop(0, W + '.85)'); lip.addColorStop(.5, W + '.12)'); lip.addColorStop(1, W + '.35)');
+      ctx.strokeStyle = lip; ctx.lineWidth = R1 * .05; ctx.beginPath(); ctx.arc(cx, cy, R1, 0, Math.PI * 2); ctx.stroke();
+      ctx.fillStyle = '#050505'; ctx.beginPath(); ctx.arc(cx, cy, R1 * .97, 0, Math.PI * 2); ctx.fill();
+      // tarcza hamulcowa z otworami
+      ctx.fillStyle = '#121212'; ctx.beginPath(); ctx.arc(cx, cy, R1 * .8, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#000';
+      for (let k = 0; k < 48; k++) { const a = k / 48 * Math.PI * 2, rr = R1 * (.58 + (k % 3) * .07); ctx.beginPath(); ctx.arc(cx + Math.cos(a) * rr, cy + Math.sin(a) * rr, R1 * .012, 0, Math.PI * 2); ctx.fill(); }
+      // zacisk
+      ctx.fillStyle = '#1e1e1e'; ctx.beginPath(); ctx.arc(cx, cy, R1 * .86, -Math.PI * .42, -Math.PI * .08); ctx.arc(cx, cy, R1 * .55, -Math.PI * .1, -Math.PI * .4, true); ctx.closePath(); ctx.fill();
+      // szprychy (5 podwójnych)
+      for (let k = 0; k < 5; k++) {
+        const a = k / 5 * Math.PI * 2 - Math.PI / 2;
+        for (const off of [-.075, .075]) {
+          const b = a + off;
+          const pts = [[R1 * .2, b - .1], [R1 * .95, b - .035], [R1 * .95, b + .035], [R1 * .2, b + .1]].map(([rr, an]) => [cx + Math.cos(an) * rr, cy + Math.sin(an) * rr]);
+          const g = ctx.createLinearGradient(cx - R1, cy - R1, cx + R1, cy + R1);
+          g.addColorStop(0, '#5a5a5a'); g.addColorStop(.5, '#232323'); g.addColorStop(1, '#3a3a3a');
+          ctx.fillStyle = g; ctx.beginPath(); pts.forEach((p, i) => i ? ctx.lineTo(...p) : ctx.moveTo(...p)); ctx.closePath(); ctx.fill();
+          ctx.strokeStyle = W + '.4)'; ctx.lineWidth = .8; ctx.beginPath(); ctx.moveTo(...pts[0]); ctx.lineTo(...pts[1]); ctx.stroke();
+        }
+      }
+      ctx.fillStyle = '#151515'; ctx.beginPath(); ctx.arc(cx, cy, R1 * .22, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = W + '.25)'; ctx.lineWidth = 1; ctx.stroke();
+      ctx.fillStyle = '#2a2a2a';
+      for (let k = 0; k < 5; k++) { const a = k / 5 * Math.PI * 2; ctx.beginPath(); ctx.arc(cx + Math.cos(a) * R1 * .14, cy + Math.sin(a) * R1 * .14, R1 * .022, 0, Math.PI * 2); ctx.fill(); }
+      // dekielek w kształcie heksagonu
+      ctx.strokeStyle = W + '.75)'; ctx.lineWidth = 1.2; ctx.beginPath();
+      for (let k = 0; k < 6; k++) { const a = Math.PI / 3 * k - Math.PI / 2, p = [cx + Math.cos(a) * R1 * .07, cy + Math.sin(a) * R1 * .07]; k ? ctx.lineTo(...p) : ctx.moveTo(...p); }
+      ctx.closePath(); ctx.stroke();
+      const v = ctx.createLinearGradient(0, 0, w, h); v.addColorStop(0, 'rgba(0,0,0,.1)'); v.addColorStop(1, 'rgba(0,0,0,.7)');
+      ctx.fillStyle = v; ctx.fillRect(0, 0, w, h);
+    },
+    // sufit z heksagonalnymi lampami
+    // sufit z heksagonalnymi lampami w perspektywie
+    hex(ctx, w, h, R) {
+      const f = w * .62, hz = h * .9, cx = w / 2;
+      const P = (x, z) => [cx + f * x / z, hz - f / z];
+      const zNear = f / hz * .9, zFar = zNear * 14;
+      const r = .22, hw = Math.sqrt(3) * r, vh = 1.5 * r;
+      ctx.lineCap = 'butt';
+      for (let row = 0; zNear + row * vh < zFar; row++) {
+        const zc = zNear + row * vh;
+        const half = zc * (w / 2) / f + hw * 2;
+        for (let col = -Math.ceil(half / hw); col * hw < half; col++) {
+          const xc = col * hw + (row % 2 ? hw / 2 : 0);
+          for (let k = 0; k < 6; k++) {
+            const a1 = Math.PI / 3 * k + Math.PI / 6, a2 = a1 + Math.PI / 3;
+            let x1 = xc + r * Math.cos(a1), z1 = zc + r * Math.sin(a1);
+            let x2 = xc + r * Math.cos(a2), z2 = zc + r * Math.sin(a2);
+            const g = .12;
+            [x1, z1, x2, z2] = [x1 + (x2 - x1) * g, z1 + (z2 - z1) * g, x2 - (x2 - x1) * g, z2 - (z2 - z1) * g];
+            if (Math.min(z1, z2) < zNear * .7) continue;
+            const zm = (z1 + z2) / 2, depth = (zm - zNear) / (zFar - zNear);
+            ctx.strokeStyle = W + Math.max(0, (1 - depth * 1.15)) * (.6 + R() * .4) + ')';
+            ctx.lineWidth = Math.max(.6, f * .016 / zm);
+            const [sx1, sy1] = P(x1, z1), [sx2, sy2] = P(x2, z2);
+            ctx.beginPath(); ctx.moveTo(sx1, sy1); ctx.lineTo(sx2, sy2); ctx.stroke();
+          }
+        }
+      }
+    },
+    // sylwetka coupé pod lampami
+    car(ctx, w, h) {
+      const X = v => v * w, Y = v => v * h;
+      const body = () => {
+        ctx.beginPath();
+        ctx.moveTo(X(.03), Y(.8));
+        ctx.bezierCurveTo(X(0), Y(.7), X(.01), Y(.52), X(.06), Y(.46));
+        ctx.bezierCurveTo(X(.15), Y(.38), X(.25), Y(.3), X(.33), Y(.15));
+        ctx.bezierCurveTo(X(.38), Y(.05), X(.5), Y(.02), X(.56), Y(.06));
+        ctx.bezierCurveTo(X(.62), Y(.12), X(.66), Y(.26), X(.72), Y(.32));
+        ctx.bezierCurveTo(X(.85), Y(.38), X(.97), Y(.44), X(.995), Y(.56));
+        ctx.lineTo(X(.99), Y(.8)); ctx.lineTo(X(.875), Y(.8));
+        ctx.arc(X(.8), Y(.8), X(.075), 0, Math.PI, true);
+        ctx.lineTo(X(.275), Y(.8));
+        ctx.arc(X(.2), Y(.8), X(.075), 0, Math.PI, true);
+        ctx.closePath();
+      };
+      // odbicie w posadzce
+      ctx.save(); ctx.translate(X(.5), Y(.84)); ctx.scale(1, .07);
+      const fl = ctx.createRadialGradient(0, 0, 0, 0, 0, X(.55));
+      fl.addColorStop(0, W + '.22)'); fl.addColorStop(1, W + '0)');
+      ctx.fillStyle = fl; ctx.beginPath(); ctx.arc(0, 0, X(.55), 0, Math.PI * 2); ctx.fill(); ctx.restore();
+      const bg = ctx.createLinearGradient(0, 0, 0, h);
+      bg.addColorStop(0, '#1c1c1c'); bg.addColorStop(.45, '#0b0b0b'); bg.addColorStop(1, '#030303');
+      ctx.fillStyle = bg; body(); ctx.fill();
+      // odbicia lamp na karoserii
+      ctx.save(); body(); ctx.clip();
+      const r = w / 22;
+      for (let i = 0; i < 7; i++) {
+        const y = h * (.08 + i * .075);
+        ctx.strokeStyle = W + Math.max(.05, .55 - i * .08) + ')'; ctx.lineWidth = Math.max(1, 2.4 - i * .3);
+        for (let x = -r; x < w + r; x += r * 1.8) {
+          const off = (i % 2) * r * .9, bend = Math.sin(((x + off) / w) * Math.PI) * h * .05;
+          ctx.beginPath(); ctx.moveTo(x + off, y - bend); ctx.lineTo(x + off + r * 1.1, y - bend * .92); ctx.stroke();
+        }
+      }
+      // linia boczna
+      const sh = ctx.createLinearGradient(0, 0, w, 0);
+      sh.addColorStop(0, W + '0)'); sh.addColorStop(.5, W + '.55)'); sh.addColorStop(1, W + '.1)');
+      ctx.strokeStyle = sh; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(X(.05), Y(.5)); ctx.bezierCurveTo(X(.4), Y(.47), X(.7), Y(.5), X(.99), Y(.58)); ctx.stroke();
+      ctx.restore();
+      // szyba boczna
+      ctx.beginPath();
+      ctx.moveTo(X(.355), Y(.18)); ctx.bezierCurveTo(X(.4), Y(.09), X(.52), Y(.07), X(.56), Y(.1));
+      ctx.bezierCurveTo(X(.6), Y(.15), X(.63), Y(.24), X(.655), Y(.3)); ctx.lineTo(X(.37), Y(.3)); ctx.closePath();
+      ctx.fillStyle = '#050505'; ctx.fill(); ctx.strokeStyle = W + '.22)'; ctx.lineWidth = 1; ctx.stroke();
+      // linia dachu w świetle
+      ctx.strokeStyle = W + '.9)'; ctx.lineWidth = 1.3; ctx.beginPath();
+      ctx.moveTo(X(.2), Y(.33)); ctx.bezierCurveTo(X(.27), Y(.27), X(.3), Y(.2), X(.33), Y(.15));
+      ctx.bezierCurveTo(X(.38), Y(.05), X(.5), Y(.02), X(.56), Y(.06));
+      ctx.bezierCurveTo(X(.62), Y(.12), X(.66), Y(.26), X(.72), Y(.32));
+      ctx.stroke();
+      // koła
+      for (const cx of [.2, .8]) {
+        const x = X(cx), y = Y(.8), rr = X(.062);
+        ctx.fillStyle = '#020202'; ctx.beginPath(); ctx.arc(x, y, rr, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = W + '.35)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(x, y, rr * .68, 0, Math.PI * 2); ctx.stroke();
+        ctx.strokeStyle = W + '.15)';
+        for (let k = 0; k < 10; k++) { const a = k / 10 * Math.PI * 2; ctx.beginPath(); ctx.moveTo(x + Math.cos(a) * rr * .15, y + Math.sin(a) * rr * .15); ctx.lineTo(x + Math.cos(a) * rr * .66, y + Math.sin(a) * rr * .66); ctx.stroke(); }
+      }
+    }
+  };
+
+  const paintScene = c => {
+    const fn = scenes[c.dataset.scene]; if (!fn) return;
+    const dpr = Math.min(devicePixelRatio || 1, 2), w = c.clientWidth, h = c.clientHeight;
+    if (!w || !h) return;
+    c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
+    const ctx = c.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    fn(ctx, w, h, rng(+c.dataset.seed || 1));
+  };
+  const paint = () => $$('canvas.scene').forEach(paintScene);
+  paint();
+  let rz, lastW = innerWidth;
+  addEventListener('resize', () => {
+    clearTimeout(rz);
+    rz = setTimeout(() => { if (innerWidth !== lastW) { lastW = innerWidth; paint(); } }, 150);
+  });
+
+  /* ---------- nawigacja ---------- */
+  const nav = $('#nav'), hero = $('.hero');
+  const onScroll = () => nav.classList.toggle('is-solid', scrollY > hero.offsetHeight - 80);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  /* ---------- menu pełnoekranowe ---------- */
+  const menu = $('#menu'), openBtn = $('#menuOpen'), closeBtn = $('#menuClose');
+  let lastFocus;
+  const openMenu = () => {
+    lastFocus = document.activeElement;
+    menu.hidden = false;
+    requestAnimationFrame(() => { menu.classList.add('is-open'); closeBtn.focus(); });
+    openBtn.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('no-scroll');
+  };
+  const closeMenu = (focusBack = true) => {
+    menu.classList.remove('is-open');
+    openBtn.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('no-scroll');
+    setTimeout(() => { if (!menu.classList.contains('is-open')) menu.hidden = true; }, 350);
+    if (focusBack && lastFocus) lastFocus.focus();
+  };
+  openBtn.addEventListener('click', openMenu);
+  closeBtn.addEventListener('click', () => closeMenu());
+  $$('[data-close]', menu).forEach(a => a.addEventListener('click', () => closeMenu(false)));
+  document.addEventListener('keydown', e => {
+    if (!menu.classList.contains('is-open')) return;
+    if (e.key === 'Escape') { closeMenu(); return; }
+    if (e.key !== 'Tab') return;
+    const f = $$('a,button', menu).filter(el => el.offsetParent !== null);
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  /* ---------- hero: pokaz slajdów ---------- */
+  const slides = $$('.hero__slide'), copies = $$('.hero__copy'), tabs = $$('.hero__tab');
+  const bar = $('#heroProgress'), pauseBtn = $('#heroPause');
+  const DUR = 7000;
+  let cur = 0, t = 0, last = null, paused = reduced, visible = true;
+  const go = n => {
+    cur = (n + slides.length) % slides.length; t = 0;
+    slides.forEach((s, i) => s.classList.toggle('is-active', i === cur));
+    copies.forEach((c, i) => { c.classList.toggle('is-active', i === cur); c.setAttribute('aria-hidden', i === cur ? 'false' : 'true'); });
+    tabs.forEach((b, i) => b.setAttribute('aria-selected', i === cur ? 'true' : 'false'));
+  };
+  const setPaused = p => {
+    paused = p;
+    $('#icoPause').style.display = p ? 'none' : '';
+    $('#icoPlay').style.display = p ? '' : 'none';
+    pauseBtn.setAttribute('aria-label', p ? 'Wznów pokaz slajdów' : 'Zatrzymaj pokaz slajdów');
+  };
+  setPaused(paused);
+  tabs.forEach(b => b.addEventListener('click', () => go(+b.dataset.go)));
+  pauseBtn.addEventListener('click', () => setPaused(!paused));
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(hero);
+  const tick = ts => {
+    if (last === null) last = ts;
+    const dt = Math.min(ts - last, 100); last = ts;
+    if (!paused && visible && !document.hidden) { t += dt; if (t >= DUR) go(cur + 1); }
+    bar.style.transform = `scaleX(${Math.min(t / DUR, 1)})`;
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+
+  /* ---------- manifest: słowa zapalają się przy przewijaniu ---------- */
+  const mt = $('#manifestText');
+  mt.innerHTML = mt.textContent.trim().split(/\s+/).map(w => `<span class="w">${w}</span> `).join('');
+  const words = $$('.w', mt);
+  const lightWords = () => {
+    const r = mt.getBoundingClientRect(), vh = innerHeight;
+    const p = reduced ? 1 : Math.min(Math.max((vh * .85 - r.top) / (r.height + vh * .35), 0), 1);
+    const n = Math.round(p * words.length);
+    words.forEach((w, i) => w.classList.toggle('on', i < n));
+  };
+  addEventListener('scroll', lightWords, { passive: true }); lightWords();
+
+  /* ---------- pojawianie się ---------- */
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { rootMargin: '0px 0px -10% 0px' });
+  $$('.reveal').forEach(el => io.observe(el));
+
+  /* ---------- przed / po ---------- */
+  const cmp = $('#compare'), range = $('#compareRange');
+  const setPos = v => cmp.style.setProperty('--pos', v + '%');
+  range.addEventListener('input', () => setPos(range.value));
+  setPos(range.value);
+
+  /* ---------- wybór usługi z kart i pakietów ---------- */
+  const sel = $('#f-service');
+  $$('[data-service]').forEach(a => a.addEventListener('click', () => {
+    sel.value = a.dataset.service;
+    sel.closest('.field').classList.remove('invalid');
+  }));
+
+  /* ---------- formularz ---------- */
+  const form = $('#bookForm'), success = $('#success'), btn = $('#submitBtn'), status = $('#formStatus');
+  const date = $('#f-date');
+  const tomorrow = new Date(Date.now() + 864e5).toISOString().slice(0, 10);
+  date.min = tomorrow;
+  const rules = {
+    'f-name': v => v.trim().length >= 3,
+    'f-phone': v => v.replace(/\D/g, '').length >= 9,
+    'f-email': v => !v || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
+    'f-car': v => v.trim().length >= 2,
+    'f-service': v => !!v,
+    'f-date': v => !v || v >= tomorrow
+  };
+  const check = id => {
+    const el = $('#' + id), ok = rules[id](el.value);
+    el.closest('.field').classList.toggle('invalid', !ok);
+    el.setAttribute('aria-invalid', ok ? 'false' : 'true');
+    if (!ok) el.setAttribute('aria-describedby', 'e-' + id.slice(2)); else el.removeAttribute('aria-describedby');
+    return ok;
+  };
+  Object.keys(rules).forEach(id => {
+    const el = $('#' + id);
+    el.addEventListener('blur', () => { if (el.value) check(id); });
+    el.addEventListener('input', () => { if (el.closest('.field').classList.contains('invalid')) check(id); });
+  });
+  const consent = $('#f-consent');
+  consent.addEventListener('change', () => $('#c-consent').classList.toggle('invalid', !consent.checked));
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const bad = Object.keys(rules).filter(id => !check(id));
+    const consentOk = consent.checked;
+    $('#c-consent').classList.toggle('invalid', !consentOk);
+    if (bad.length || !consentOk) {
+      status.textContent = 'Uzupełnij zaznaczone pola.';
+      (bad.length ? $('#' + bad[0]) : consent).focus();
+      return;
+    }
+    status.textContent = '';
+    btn.classList.add('loading'); btn.disabled = true; $('.txt', btn).textContent = 'Wysyłanie…';
+    // Tu podłącz prawdziwą wysyłkę (np. Formspree, własne API). Na razie symulacja.
+    setTimeout(() => {
+      btn.classList.remove('loading'); btn.disabled = false; $('.txt', btn).textContent = 'Wyślij zgłoszenie';
+      form.style.display = 'none'; success.classList.add('show'); success.focus();
+    }, 1100);
+  });
+  $('#againBtn').addEventListener('click', () => {
+    form.reset(); success.classList.remove('show'); form.style.display = '';
+    $$('.field', form).forEach(f => f.classList.remove('invalid'));
+    $('#f-name').focus();
+  });
+
+  $('#year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
