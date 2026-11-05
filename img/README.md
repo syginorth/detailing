@@ -1,6 +1,6 @@
 # Zdjęcia
 
-Wszystkie zdjęcia pochodzą z Unsplash (licencja Unsplash: wolno używać za darmo, także bez podpisu autora).
+Zdjęcia pochodzą z Unsplash (poza `przed.jpg` i `po.jpg`) (licencja Unsplash: wolno używać za darmo, także bez podpisu autora).
 Żeby podmienić zdjęcie, wrzuć nowe pod tą samą nazwą pliku.
 
 | Plik | Gdzie się pokaże | Co przedstawia | Źródło (ID na Unsplash) |
@@ -15,9 +15,8 @@ Wszystkie zdjęcia pochodzą z Unsplash (licencja Unsplash: wolno używać za da
 | `usluga-5.jpg` | Mycie detailingowe | Mycie GT-R pianą | photo-1520340356584-f9917d1eea6f |
 | `usluga-6.jpg` | Felgi i zaciski | Felga Lamborghini Huracán | photo-1573950940509-d924ee3fd345 |
 | `studio.jpg` | Sekcja Studio | Dodge Challenger w garażu z LED | photo-1626668893632-6f3a4466d22f |
-| `porownanie.jpg` | Suwak Przed / Po | Czarne Porsche 911 GT3 RS | photo-1580274455191-1c62238fa333 |
+| `przed.jpg` | Suwak Przed / Po (lewa strona) | Niebieska maska z hologramami przed korektą | zdjęcie własne |
+| `po.jpg` | Suwak Przed / Po (prawa strona) | Ta sama maska po korekcie, lustrzane odbicie | zdjęcie własne |
 | `projekt-1.jpg` | Realizacja 1 | Lamborghini z otwartymi drzwiami | photo-1571607388263-1044f9ea01dd |
 | `projekt-2.jpg` | Realizacja 2 | Ręczne mycie Porsche Taycan | photo-1607860108855-64acf2078ed9 |
 | `projekt-3.jpg` | Realizacja 3 | Chevrolet Camaro ZL1 w garażu | photo-1492144534655-ae79c964c9d7 |
-
-Wersja „przed” w suwaku to to samo zdjęcie, automatycznie przyciemnione i zmatowione przez CSS.

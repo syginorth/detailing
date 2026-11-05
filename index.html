@@ -359,15 +359,8 @@ body.no-scroll{overflow:hidden}
 .compare__layer{position:absolute;inset:0}
 .compare__layer img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .compare__before{clip-path:inset(0 calc(100% - var(--pos)) 0 0)}
-/* „przed”: matowy, zszarzały lakier z hologramami (swirl marks) */
-.compare__before img{filter:saturate(.35) brightness(.62) contrast(.78) blur(.4px)}
-.compare__before::after{
-  content:"";position:absolute;inset:0;mix-blend-mode:screen;opacity:.55;
-  background:
-    repeating-radial-gradient(circle at 62% 38%,rgba(255,255,255,.09) 0 1px,transparent 1px 7px),
-    repeating-radial-gradient(circle at 30% 70%,rgba(255,255,255,.06) 0 1px,transparent 1px 5px),
-    linear-gradient(rgba(140,140,140,.18),rgba(140,140,140,.18));
-}
+.compare__before img{object-position:50% 28%}
+.compare__after img{object-position:50% 40%}
 .compare__handle{
   position:absolute;top:0;bottom:0;left:var(--pos);width:1px;background:var(--white);
   pointer-events:none;z-index:2;
@@ -776,8 +769,8 @@ body.no-scroll{overflow:hidden}
     </div>
 
     <div class="compare reveal" id="compare">
-      <div class="compare__layer compare__after"><img src="img/porownanie.jpg" alt="Czarne Porsche 911 GT3 RS po korekcie lakieru: głęboka czerń i czyste odbicia" loading="lazy"></div>
-      <div class="compare__layer compare__before" aria-hidden="true"><img src="img/porownanie.jpg" alt="" loading="lazy"></div>
+      <div class="compare__layer compare__after"><img src="img/po.jpg" alt="Po korekcie: niebieska maska bez rys, z lustrzanym odbiciem drzew i nieba" loading="lazy"></div>
+      <div class="compare__layer compare__before"><img src="img/przed.jpg" alt="Przed korektą: niebieska maska pokryta hologramami i drobnymi rysami widocznymi w słońcu" loading="lazy"></div>
       <div class="compare__tag compare__tag--l"><span class="label">Przed</span></div>
       <div class="compare__tag compare__tag--r"><span class="label">Po</span></div>
       <div class="compare__handle">
