@@ -229,7 +229,7 @@ body.no-scroll{overflow:hidden}
 }
 .hero__slide.is-active{opacity:1;visibility:visible;transition:opacity 1.2s ease}
 .media{position:absolute;inset:0;overflow:hidden;background:var(--black)}
-.media img,.media canvas,.service__media canvas,.compare__layer canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero__slide .media > *{transform:scale(1.06);transition:transform 9s linear}
 .hero__slide.is-active .media > *{transform:scale(1)}
 @media (prefers-reduced-motion:reduce){.hero__slide .media > *{transform:none!important;transition:none}}
@@ -336,14 +336,7 @@ body.no-scroll{overflow:hidden}
 .studio{position:relative;background:var(--black);overflow:hidden}
 .studio__grid{display:grid}
 .studio__visual{position:relative;min-height:420px;aspect-ratio:4/3;overflow:hidden;background:var(--black)}
-.studio__visual .ceiling{position:absolute;inset:0;width:100%;height:100%}
-.studio__visual::after{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 40%,rgba(0,0,0,.7) 75%,#000 92%);
-}
-.studio__visual .reflect{z-index:2;
-  position:absolute;left:7%;bottom:9%;width:86%;aspect-ratio:3.2/1;height:auto;z-index:1;
-}
+.studio__visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .studio__copy{display:grid;gap:28px;align-content:center;padding:clamp(48px,6vw,96px) var(--gutter)}
 .specs{display:grid;border-top:1px solid var(--charcoal)}
 .specs div{display:flex;justify-content:space-between;gap:24px;padding:16px 0;border-bottom:1px solid var(--charcoal)}
@@ -367,7 +360,7 @@ body.no-scroll{overflow:hidden}
 .compare__layer img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .compare__before{clip-path:inset(0 calc(100% - var(--pos)) 0 0)}
 /* „przed”: matowy, zszarzały lakier z hologramami (swirl marks) */
-.compare__before img,.compare__before canvas{filter:saturate(.35) brightness(.62) contrast(.78) blur(.4px)}
+.compare__before img{filter:saturate(.35) brightness(.62) contrast(.78) blur(.4px)}
 .compare__before::after{
   content:"";position:absolute;inset:0;mix-blend-mode:screen;opacity:.55;
   background:
@@ -391,7 +384,11 @@ body.no-scroll{overflow:hidden}
 .compare__tag span{background:rgba(0,0,0,.7);padding:8px 12px;display:inline-block}
 .projects{display:grid;gap:2px;margin-top:2px}
 @media (min-width:768px){.projects{grid-template-columns:repeat(3,1fr)}}
-.project{background:var(--iron);padding:24px;display:grid;gap:10px}
+.project{background:var(--iron);display:flex;flex-direction:column}
+.project__media{position:relative;aspect-ratio:4/3;overflow:hidden}
+.project__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.85);transition:filter .4s ease}
+.project:hover .project__media img{filter:brightness(1)}
+.project__body{padding:24px;display:grid;gap:10px}
 .project p{color:var(--steel)}
 
 /* =========================================================
@@ -589,13 +586,13 @@ body.no-scroll{overflow:hidden}
 <!-- ============ HERO ============ -->
 <section class="hero" id="top" aria-roledescription="karuzela" aria-label="Najważniejsze usługi">
   <div class="hero__slide is-active" data-slide="0">
-    <div class="media" data-photo="img/hero-1.jpg"><canvas class="scene" data-scene="panel" data-seed="3" aria-hidden="true"></canvas></div>
+    <div class="media"><img src="img/hero-1.jpg" alt="" fetchpriority="high"></div>
   </div>
   <div class="hero__slide" data-slide="1">
-    <div class="media" data-photo="img/hero-2.jpg"><canvas class="scene" data-scene="ppf" data-seed="8" aria-hidden="true"></canvas></div>
+    <div class="media"><img src="img/hero-2.jpg" alt=""></div>
   </div>
   <div class="hero__slide" data-slide="2">
-    <div class="media" data-photo="img/hero-3.jpg"><canvas class="scene" data-scene="beads" data-seed="5" aria-hidden="true"></canvas></div>
+    <div class="media"><img src="img/hero-3.jpg" alt=""></div>
   </div>
   <div class="hero__shade"></div>
 
@@ -671,7 +668,7 @@ body.no-scroll{overflow:hidden}
 
     <div class="services">
       <article class="service reveal">
-        <div class="service__media" data-photo="img/usluga-1.jpg" data-alt="Polerowanie lakieru maszyną polerską"><canvas class="scene" data-scene="panel" data-seed="11" aria-hidden="true"></canvas><span class="service__num badge">01</span></div>
+        <div class="service__media"><img src="img/usluga-1.jpg" alt="Błyszcząca maska Mercedesa-AMG z odbiciami miasta" loading="lazy"><span class="service__num badge">01</span></div>
         <div class="service__body">
           <h3 class="h-feature">Korekta lakieru</h3>
           <p>Usuwamy hologramy, zmatowienia i drobne rysy. Jedno lub wieloetapowe polerowanie, dobrane do twardości lakieru.</p>
@@ -683,7 +680,7 @@ body.no-scroll{overflow:hidden}
         </div>
       </article>
       <article class="service reveal">
-        <div class="service__media" data-photo="img/usluga-2.jpg" data-alt="Krople wody na zabezpieczonym lakierze"><canvas class="scene" data-scene="beads" data-seed="17" aria-hidden="true"></canvas><span class="service__num badge">02</span></div>
+        <div class="service__media"><img src="img/usluga-2.jpg" alt="Tył Porsche 911 pokryty kroplami wody" loading="lazy"><span class="service__num badge">02</span></div>
         <div class="service__body">
           <h3 class="h-feature">Powłoka ceramiczna</h3>
           <p>Twarda warstwa ochronna o trwałości od 3 do 5 lat. Efekt hydrofobowy, łatwiejsze mycie i głęboki połysk.</p>
@@ -695,7 +692,7 @@ body.no-scroll{overflow:hidden}
         </div>
       </article>
       <article class="service reveal">
-        <div class="service__media" data-photo="img/usluga-3.jpg" data-alt="Przód sportowego auta zabezpieczony folią"><canvas class="scene" data-scene="ppf" data-seed="4" aria-hidden="true"></canvas><span class="service__num badge">03</span></div>
+        <div class="service__media"><img src="img/usluga-3.jpg" alt="Matowy czarny Mercedes-AMG GT" loading="lazy"><span class="service__num badge">03</span></div>
         <div class="service__body">
           <h3 class="h-feature">Folia ochronna PPF</h3>
           <p>Bezbarwna lub matowa folia poliuretanowa. Samoregenerujące się zarysowania i ochrona przed odpryskami.</p>
@@ -707,7 +704,7 @@ body.no-scroll{overflow:hidden}
         </div>
       </article>
       <article class="service reveal">
-        <div class="service__media" data-photo="img/usluga-4.jpg" data-alt="Skórzane wnętrze samochodu"><canvas class="scene" data-scene="leather" data-seed="2" aria-hidden="true"></canvas><span class="service__num badge">04</span></div>
+        <div class="service__media"><img src="img/usluga-4.jpg" alt="Czarne, pikowane skórzane fotele i kokpit Mercedesa" loading="lazy"><span class="service__num badge">04</span></div>
         <div class="service__body">
           <h3 class="h-feature">Detailing wnętrza</h3>
           <p>Czyszczenie i impregnacja skóry, pranie tapicerki, ozonowanie. Kabina pachnie i wygląda jak nowa.</p>
@@ -719,7 +716,7 @@ body.no-scroll{overflow:hidden}
         </div>
       </article>
       <article class="service reveal">
-        <div class="service__media" data-photo="img/usluga-5.jpg" data-alt="Mycie auta aktywną pianą"><canvas class="scene" data-scene="foam" data-seed="9" aria-hidden="true"></canvas><span class="service__num badge">05</span></div>
+        <div class="service__media"><img src="img/usluga-5.jpg" alt="Mycie Nissana GT-R aktywną pianą" loading="lazy"><span class="service__num badge">05</span></div>
         <div class="service__body">
           <h3 class="h-feature">Mycie detailingowe</h3>
           <p>Mycie metodą dwóch wiader, dekontaminacja chemiczna i glinkowanie. Bezpieczne dla każdej powłoki.</p>
@@ -731,7 +728,7 @@ body.no-scroll{overflow:hidden}
         </div>
       </article>
       <article class="service reveal">
-        <div class="service__media" data-photo="img/usluga-6.jpg" data-alt="Felga samochodu z bliska"><canvas class="scene" data-scene="wheel" data-seed="6" aria-hidden="true"></canvas><span class="service__num badge">06</span></div>
+        <div class="service__media"><img src="img/usluga-6.jpg" alt="Felga i pomarańczowy zacisk hamulcowy Lamborghini" loading="lazy"><span class="service__num badge">06</span></div>
         <div class="service__body">
           <h3 class="h-feature">Felgi i zaciski</h3>
           <p>Dokładne czyszczenie felg z obu stron, ceramika na felgi i zaciski hamulcowe. Mniej pyłu, łatwiejsze mycie.</p>
@@ -749,16 +746,15 @@ body.no-scroll{overflow:hidden}
 <!-- ============ STUDIO ============ -->
 <section class="studio" id="studio" aria-labelledby="studio-t">
   <div class="studio__grid">
-    <div class="studio__visual" aria-hidden="true">
-      <canvas class="ceiling scene" data-scene="hex"></canvas>
-      <canvas class="reflect scene" data-scene="car"></canvas>
+    <div class="studio__visual">
+      <img src="img/studio.jpg" alt="Czarny Dodge Challenger w ciemnym garażu oświetlonym liniami LED" loading="lazy">
     </div>
     <div class="studio__copy">
       <p class="kicker label"><b>02</b> Studio</p>
       <h2 class="h-section" id="studio-t">Światło, które<br>widzi wszystko</h2>
-      <p class="body-lg">Heksagonalne oświetlenie inspekcyjne odbija się w lakierze jak siatka. Każda rysa, każdy hologram i każda nierówność są widoczne od razu. Dzięki temu nic nie ucieka naszej uwadze.</p>
+      <p class="body-lg">Mocne oświetlenie inspekcyjne LED odbija się w lakierze ostrymi liniami. Każda rysa, każdy hologram i każda nierówność są widoczne od razu. Dzięki temu nic nie ucieka naszej uwadze.</p>
       <dl class="specs">
-        <div><dt class="label">Oświetlenie</dt><dd>Heksagonalne LED · 6500 K</dd></div>
+        <div><dt class="label">Oświetlenie</dt><dd>Inspekcyjne LED · 6500 K</dd></div>
         <div><dt class="label">Temperatura</dt><dd>Stałe 20–22°C</dd></div>
         <div><dt class="label">Pomiar lakieru</dt><dd>Każdy element karoserii</dd></div>
         <div><dt class="label">Bezpieczeństwo</dt><dd>Monitoring i ubezpieczenie OC</dd></div>
@@ -780,8 +776,8 @@ body.no-scroll{overflow:hidden}
     </div>
 
     <div class="compare reveal" id="compare">
-      <div class="compare__layer compare__after" data-photo="img/porownanie.jpg" data-alt="Lakier po korekcie: głęboki połysk i czyste odbicia"><canvas class="scene" data-scene="panel" data-seed="21" role="img" aria-label="Lakier po korekcie: głęboki połysk i czyste odbicia"></canvas></div>
-      <div class="compare__layer compare__before" data-photo="img/porownanie.jpg" aria-hidden="true"><canvas class="scene" data-scene="panel" data-seed="21"></canvas></div>
+      <div class="compare__layer compare__after"><img src="img/porownanie.jpg" alt="Czarne Porsche 911 GT3 RS po korekcie lakieru: głęboka czerń i czyste odbicia" loading="lazy"></div>
+      <div class="compare__layer compare__before" aria-hidden="true"><img src="img/porownanie.jpg" alt="" loading="lazy"></div>
       <div class="compare__tag compare__tag--l"><span class="label">Przed</span></div>
       <div class="compare__tag compare__tag--r"><span class="label">Po</span></div>
       <div class="compare__handle">
@@ -794,9 +790,9 @@ body.no-scroll{overflow:hidden}
     </div>
 
     <div class="projects">
-      <div class="project reveal"><p class="label gold-text">Korekta + ceramika</p><h3 class="h-feature">Coupé GT · Czarny metalik</h3><p>3 etapy polerowania, powłoka na 5 lat. 4 dni.</p></div>
-      <div class="project reveal"><p class="label gold-text">Full body PPF</p><h3 class="h-feature">SUV · Szary mat</h3><p>Matowa folia na całe nadwozie, ceramika na felgi. 6 dni.</p></div>
-      <div class="project reveal"><p class="label gold-text">Wnętrze</p><h3 class="h-feature">Limuzyna · Beżowa skóra</h3><p>Czyszczenie i impregnacja skóry, ozonowanie. 1 dzień.</p></div>
+      <div class="project reveal"><div class="project__media"><img src="img/projekt-1.jpg" alt="Czarne Lamborghini z otwartymi drzwiami o zachodzie słońca" loading="lazy"></div><div class="project__body"><p class="label gold-text">Full body PPF</p><h3 class="h-feature">Lamborghini · Czarny mat</h3><p>Matowa folia na całe nadwozie, ceramika na felgi. 6 dni.</p></div></div>
+      <div class="project reveal"><div class="project__media"><img src="img/projekt-2.jpg" alt="Ręczne mycie czarnego Porsche Taycan" loading="lazy"></div><div class="project__body"><p class="label gold-text">Mycie + ceramika</p><h3 class="h-feature">Porsche Taycan · Czarny</h3><p>Mycie detailingowe, dekontaminacja i powłoka na 3 lata. 3 dni.</p></div></div>
+      <div class="project reveal"><div class="project__media"><img src="img/projekt-3.jpg" alt="Biały Chevrolet Camaro ZL1 w ciemnym garażu" loading="lazy"></div><div class="project__body"><p class="label gold-text">Korekta + ceramika</p><h3 class="h-feature">Camaro ZL1 · Biały</h3><p>2 etapy polerowania, powłoka na 5 lat. 4 dni.</p></div></div>
     </div>
   </div>
 </section>
@@ -982,7 +978,7 @@ body.no-scroll{overflow:hidden}
     <p class="footer__word" aria-hidden="true">Noctis</p>
     <div class="footer__bottom micro">
       <span>© <span id="year">2026</span> NOCTIS Studio Detailingu</span>
-      <span>Dane kontaktowe na stronie są przykładowe</span>
+      <span>Dane kontaktowe na stronie są przykładowe · Zdjęcia: Unsplash</span>
     </div>
   </div>
 </footer>
@@ -992,332 +988,6 @@ body.no-scroll{overflow:hidden}
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-
-  /* ---------- własne zdjęcia ----------
-     Wrzuć plik do folderu img/ (np. img/hero-1.jpg), a zastąpi grafikę rysowaną w przeglądarce. */
-  $$('[data-photo]').forEach(box => {
-    const im = new Image();
-    im.onload = () => {
-      im.alt = box.dataset.alt || '';
-      if (!im.alt) im.setAttribute('aria-hidden', 'true');
-      box.appendChild(im);
-      box.querySelector('canvas.scene')?.setAttribute('hidden', '');
-    };
-    im.src = box.dataset.photo;
-  });
-
-  /* ---------- grafiki rysowane (canvas) ---------- */
-  const rng = seed => { let s = (seed * 9301 + 49297) % 233280 || 1; return () => (s = (s * 16807) % 2147483647) / 2147483647; };
-  const W = 'rgba(255,255,255,';
-
-  function hexGrid(ctx, w, h, R, o = {}) {
-    const r = o.size || Math.max(48, w / 11);
-    const hw = Math.sqrt(3) * r, vh = 1.5 * r, gap = r * (o.gap ?? .12);
-    for (let row = -1; row * vh < h + r; row++) {
-      for (let col = -1; col * hw < w + hw; col++) {
-        const cx = col * hw + (row % 2 ? hw / 2 : 0), cy = row * vh;
-        for (let k = 0; k < 6; k++) {
-          const a1 = Math.PI / 3 * k - Math.PI / 2, a2 = a1 + Math.PI / 3;
-          const x1 = cx + r * Math.cos(a1), y1 = cy + r * Math.sin(a1);
-          const x2 = cx + r * Math.cos(a2), y2 = cy + r * Math.sin(a2);
-          const len = Math.hypot(x2 - x1, y2 - y1), ux = (x2 - x1) / len, uy = (y2 - y1) / len;
-          const fade = o.fade ? Math.max(0, 1 - cy / h) : 1;
-          ctx.strokeStyle = W + (o.alpha ?? .9) * fade * (.55 + R() * .45) + ')';
-          ctx.lineWidth = o.line || Math.max(2, r * .07);
-          ctx.beginPath();
-          ctx.moveTo(x1 + ux * gap, y1 + uy * gap);
-          ctx.lineTo(x2 - ux * gap, y2 - uy * gap);
-          ctx.stroke();
-        }
-      }
-    }
-  }
-
-  // miękka smuga światła: kilka coraz węższych pociągnięć zamiast rozmycia (działa też w Safari)
-  function streak(ctx, path, width, alpha, grad) {
-    ctx.strokeStyle = grad; ctx.lineCap = 'round';
-    for (let k = 0; k < 7; k++) {
-      ctx.globalAlpha = alpha * .07;
-      ctx.lineWidth = width * (1 - k / 7);
-      path(); ctx.stroke();
-    }
-    ctx.globalAlpha = alpha;
-    ctx.lineWidth = Math.max(.8, width * .045);
-    path(); ctx.stroke();
-    ctx.globalAlpha = 1;
-  }
-  function lightGrad(ctx, w, peak, a) {
-    const g = ctx.createLinearGradient(0, 0, w, 0);
-    g.addColorStop(0, W + '0)');
-    g.addColorStop(Math.max(0, peak - .3), W + a * .25 + ')');
-    g.addColorStop(peak, W + a + ')');
-    g.addColorStop(Math.min(1, peak + .32), W + a * .2 + ')');
-    g.addColorStop(1, W + '0)');
-    return g;
-  }
-
-  const scenes = {
-    // lakier: smugi światła wzdłuż przetłoczeń karoserii
-    panel(ctx, w, h, R) {
-      const bg = ctx.createLinearGradient(0, 0, w, h);
-      bg.addColorStop(0, '#030303'); bg.addColorStop(.42, '#141414'); bg.addColorStop(.58, '#080808'); bg.addColorStop(1, '#000');
-      ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h);
-      const bend = .5 + R() * .3;
-      const curve = (y0, amp) => () => {
-        ctx.beginPath(); ctx.moveTo(-w * .1, y0 + amp);
-        ctx.bezierCurveTo(w * .28, y0 - amp * bend, w * .62, y0 - amp * .35, w * 1.1, y0 + amp * .55);
-      };
-      // przetłoczenie: ciemniejsza dolna część panelu
-      const crease = h * (.52 + R() * .1), camp = h * .14;
-      ctx.save(); curve(crease, camp)(); ctx.lineTo(w * 1.1, h * 1.1); ctx.lineTo(-w * .1, h * 1.1); ctx.closePath();
-      const lower = ctx.createLinearGradient(0, crease - camp, 0, h);
-      lower.addColorStop(0, '#0d0d0d'); lower.addColorStop(1, '#000'); ctx.fillStyle = lower; ctx.fill(); ctx.restore();
-      for (let i = 0; i < 6; i++) {
-        const y0 = h * (.08 + i * .16 + R() * .05), amp = h * (.08 + R() * .1);
-        streak(ctx, curve(y0, amp), 20 + R() * 70, .35 + R() * .55, lightGrad(ctx, w, .25 + R() * .5, 1));
-      }
-      streak(ctx, curve(crease, camp), 26, 1, lightGrad(ctx, w, .45 + R() * .2, 1));
-    },
-    // folia PPF: lakier + mikrostruktura heksagonalna po jednej stronie krawędzi folii
-    ppf(ctx, w, h, R) {
-      scenes.panel(ctx, w, h, R);
-      const x0 = w * (.5 + R() * .15);
-      ctx.save(); ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(x0 + h * .2, 0); ctx.lineTo(x0 - h * .2, h); ctx.lineTo(0, h); ctx.closePath(); ctx.clip();
-      ctx.fillStyle = 'rgba(255,255,255,.025)'; ctx.fillRect(0, 0, w, h);
-      hexGrid(ctx, w, h, R, { size: Math.max(10, w / 70), alpha: .12, line: 1, gap: .05 });
-      ctx.restore();
-      ctx.strokeStyle = W + '.55)'; ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.moveTo(x0 + h * .2, 0); ctx.lineTo(x0 - h * .2, h); ctx.stroke();
-    },
-    // ceramika: krople wody na czarnym lakierze
-    beads(ctx, w, h, R) {
-      const lx = w * .68, ly = h * .3;
-      ctx.fillStyle = '#000'; ctx.fillRect(0, 0, w, h);
-      const glow = ctx.createRadialGradient(lx, ly, 0, lx, ly, Math.max(w, h) * .7);
-      glow.addColorStop(0, '#2b2b2b'); glow.addColorStop(.5, '#0e0e0e'); glow.addColorStop(1, '#000');
-      ctx.fillStyle = glow; ctx.fillRect(0, 0, w, h);
-      const n = Math.min(1100, Math.round(w * h / 700));
-      for (let i = 0; i < n; i++) {
-        const x = R() * w, y = R() * h, r = 1.2 + Math.pow(R(), 3) * Math.max(10, w / 70);
-        const L = Math.max(0, 1 - Math.hypot(x - lx, y - ly) / (Math.max(w, h) * .75));
-        // cień kropli
-        ctx.fillStyle = 'rgba(0,0,0,.55)';
-        ctx.beginPath(); ctx.arc(x + r * .12, y + r * .15, r, 0, Math.PI * 2); ctx.fill();
-        // załamane światło: miękka poświata w dolnej, odwróconej od lampy części
-        const ang = Math.atan2(y - ly, x - lx), ox = Math.cos(ang) * r * .45, oy = Math.sin(ang) * r * .45;
-        const glowIn = ctx.createRadialGradient(x + ox, y + oy, 0, x + ox, y + oy, r * .9);
-        glowIn.addColorStop(0, W + (.06 + .32 * L) + ')'); glowIn.addColorStop(1, W + '0)');
-        ctx.fillStyle = '#060606'; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
-        ctx.fillStyle = glowIn; ctx.fill();
-        ctx.strokeStyle = W + (.04 + .18 * L) + ')'; ctx.lineWidth = .5; ctx.stroke();
-        // refleks od lampy: mała, wydłużona plamka po stronie światła
-        if (r > 2) {
-          ctx.save(); ctx.translate(x - ox * .9, y - oy * .9); ctx.rotate(ang + Math.PI / 2);
-          ctx.fillStyle = W + (.25 + .7 * L) + ')';
-          ctx.beginPath(); ctx.ellipse(0, 0, r * .28, r * .12, 0, 0, Math.PI * 2); ctx.fill();
-          ctx.restore();
-        }
-      }
-    },
-    // piana aktywna
-    foam(ctx, w, h, R) {
-      const bg = ctx.createLinearGradient(0, 0, 0, h);
-      bg.addColorStop(0, '#1a1a1a'); bg.addColorStop(1, '#000');
-      ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h);
-      const haze = ctx.createLinearGradient(0, 0, 0, h * .8);
-      haze.addColorStop(0, W + '.22)'); haze.addColorStop(1, W + '0)');
-      ctx.fillStyle = haze; ctx.fillRect(0, 0, w, h);
-      // spływające strużki
-      for (let i = 0; i < 40; i++) {
-        const x = R() * w, y = h * (.3 + R() * .3), l = h * (.1 + R() * .5);
-        const g = ctx.createLinearGradient(0, y, 0, y + l); g.addColorStop(0, W + '.25)'); g.addColorStop(1, W + '0)');
-        ctx.strokeStyle = g; ctx.lineWidth = .6 + R() * 1.6;
-        ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + (R() - .5) * 6, y + l); ctx.stroke();
-      }
-      const n = Math.min(1600, Math.round(w * h / 300));
-      for (let i = 0; i < n; i++) {
-        const y = Math.pow(R(), 1.8) * h * .8, x = R() * w;
-        const r = 1 + Math.pow(R(), 2.5) * Math.max(8, w / 45);
-        ctx.fillStyle = W + (.03 + R() * .08) + ')';
-        ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
-        ctx.strokeStyle = W + (.15 + R() * .35) + ')'; ctx.lineWidth = .7; ctx.stroke();
-        ctx.fillStyle = W + '.7)';
-        ctx.beginPath(); ctx.arc(x - r * .4, y - r * .4, Math.max(.4, r * .12), 0, Math.PI * 2); ctx.fill();
-      }
-    },
-    // pikowana skóra
-    leather(ctx, w, h, R) {
-      ctx.fillStyle = '#040404'; ctx.fillRect(0, 0, w, h);
-      const s = Math.max(w, h) / 6.5, d = Math.hypot(w, h);
-      ctx.save(); ctx.translate(w / 2, h / 2); ctx.rotate(Math.PI / 4);
-      for (let i = -Math.ceil(d / s); i <= Math.ceil(d / s); i++) {
-        for (let j = -Math.ceil(d / s); j <= Math.ceil(d / s); j++) {
-          const x = i * s, y = j * s;
-          const g = ctx.createRadialGradient(x + s * .4, y + s * .4, s * .05, x + s * .5, y + s * .5, s * .75);
-          g.addColorStop(0, '#2e2e2e'); g.addColorStop(.6, '#141414'); g.addColorStop(1, '#030303');
-          ctx.fillStyle = g; ctx.fillRect(x, y, s, s);
-          ctx.setLineDash([s * .045, s * .035]);
-          ctx.strokeStyle = W + '.28)'; ctx.lineWidth = 1;
-          ctx.strokeRect(x + s * .07, y + s * .07, s * .86, s * .86);
-          ctx.setLineDash([]);
-          ctx.fillStyle = 'rgba(0,0,0,.65)';
-          for (let a = 1; a < 6; a++) for (let b = 1; b < 6; b++) {
-            ctx.beginPath(); ctx.arc(x + s * (a / 6), y + s * (b / 6), Math.max(.8, s * .012), 0, Math.PI * 2); ctx.fill();
-          }
-        }
-      }
-      ctx.restore();
-      const v = ctx.createRadialGradient(w * .35, h * .25, 0, w * .35, h * .25, d * .75);
-      v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,.9)');
-      ctx.fillStyle = v; ctx.fillRect(0, 0, w, h);
-    },
-    // felga
-    wheel(ctx, w, h, R) {
-      ctx.fillStyle = '#000'; ctx.fillRect(0, 0, w, h);
-      const cx = w * .6, cy = h * .56, R0 = Math.min(w, h) * .72, R1 = R0 * .74;
-      ctx.fillStyle = '#0a0a0a'; ctx.beginPath(); ctx.arc(cx, cy, R0, 0, Math.PI * 2); ctx.fill();
-      for (let k = 0; k < 4; k++) { ctx.strokeStyle = W + '.05)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(cx, cy, R1 + (R0 - R1) * (.2 + k * .2), 0, Math.PI * 2); ctx.stroke(); }
-      const lip = ctx.createLinearGradient(cx - R1, cy - R1, cx + R1, cy + R1);
-      lip.addColorStop(0, W + '.85)'); lip.addColorStop(.5, W + '.12)'); lip.addColorStop(1, W + '.35)');
-      ctx.strokeStyle = lip; ctx.lineWidth = R1 * .05; ctx.beginPath(); ctx.arc(cx, cy, R1, 0, Math.PI * 2); ctx.stroke();
-      ctx.fillStyle = '#050505'; ctx.beginPath(); ctx.arc(cx, cy, R1 * .97, 0, Math.PI * 2); ctx.fill();
-      // tarcza hamulcowa z otworami
-      ctx.fillStyle = '#121212'; ctx.beginPath(); ctx.arc(cx, cy, R1 * .8, 0, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = '#000';
-      for (let k = 0; k < 48; k++) { const a = k / 48 * Math.PI * 2, rr = R1 * (.58 + (k % 3) * .07); ctx.beginPath(); ctx.arc(cx + Math.cos(a) * rr, cy + Math.sin(a) * rr, R1 * .012, 0, Math.PI * 2); ctx.fill(); }
-      // zacisk
-      ctx.fillStyle = '#1e1e1e'; ctx.beginPath(); ctx.arc(cx, cy, R1 * .86, -Math.PI * .42, -Math.PI * .08); ctx.arc(cx, cy, R1 * .55, -Math.PI * .1, -Math.PI * .4, true); ctx.closePath(); ctx.fill();
-      // szprychy (5 podwójnych)
-      for (let k = 0; k < 5; k++) {
-        const a = k / 5 * Math.PI * 2 - Math.PI / 2;
-        for (const off of [-.075, .075]) {
-          const b = a + off;
-          const pts = [[R1 * .2, b - .1], [R1 * .95, b - .035], [R1 * .95, b + .035], [R1 * .2, b + .1]].map(([rr, an]) => [cx + Math.cos(an) * rr, cy + Math.sin(an) * rr]);
-          const g = ctx.createLinearGradient(cx - R1, cy - R1, cx + R1, cy + R1);
-          g.addColorStop(0, '#5a5a5a'); g.addColorStop(.5, '#232323'); g.addColorStop(1, '#3a3a3a');
-          ctx.fillStyle = g; ctx.beginPath(); pts.forEach((p, i) => i ? ctx.lineTo(...p) : ctx.moveTo(...p)); ctx.closePath(); ctx.fill();
-          ctx.strokeStyle = W + '.4)'; ctx.lineWidth = .8; ctx.beginPath(); ctx.moveTo(...pts[0]); ctx.lineTo(...pts[1]); ctx.stroke();
-        }
-      }
-      ctx.fillStyle = '#151515'; ctx.beginPath(); ctx.arc(cx, cy, R1 * .22, 0, Math.PI * 2); ctx.fill();
-      ctx.strokeStyle = W + '.25)'; ctx.lineWidth = 1; ctx.stroke();
-      ctx.fillStyle = '#2a2a2a';
-      for (let k = 0; k < 5; k++) { const a = k / 5 * Math.PI * 2; ctx.beginPath(); ctx.arc(cx + Math.cos(a) * R1 * .14, cy + Math.sin(a) * R1 * .14, R1 * .022, 0, Math.PI * 2); ctx.fill(); }
-      // dekielek w kształcie heksagonu
-      ctx.strokeStyle = W + '.75)'; ctx.lineWidth = 1.2; ctx.beginPath();
-      for (let k = 0; k < 6; k++) { const a = Math.PI / 3 * k - Math.PI / 2, p = [cx + Math.cos(a) * R1 * .07, cy + Math.sin(a) * R1 * .07]; k ? ctx.lineTo(...p) : ctx.moveTo(...p); }
-      ctx.closePath(); ctx.stroke();
-      const v = ctx.createLinearGradient(0, 0, w, h); v.addColorStop(0, 'rgba(0,0,0,.1)'); v.addColorStop(1, 'rgba(0,0,0,.7)');
-      ctx.fillStyle = v; ctx.fillRect(0, 0, w, h);
-    },
-    // sufit z heksagonalnymi lampami
-    // sufit z heksagonalnymi lampami w perspektywie
-    hex(ctx, w, h, R) {
-      const f = w * .62, hz = h * .9, cx = w / 2;
-      const P = (x, z) => [cx + f * x / z, hz - f / z];
-      const zNear = f / hz * .9, zFar = zNear * 14;
-      const r = .22, hw = Math.sqrt(3) * r, vh = 1.5 * r;
-      ctx.lineCap = 'butt';
-      for (let row = 0; zNear + row * vh < zFar; row++) {
-        const zc = zNear + row * vh;
-        const half = zc * (w / 2) / f + hw * 2;
-        for (let col = -Math.ceil(half / hw); col * hw < half; col++) {
-          const xc = col * hw + (row % 2 ? hw / 2 : 0);
-          for (let k = 0; k < 6; k++) {
-            const a1 = Math.PI / 3 * k + Math.PI / 6, a2 = a1 + Math.PI / 3;
-            let x1 = xc + r * Math.cos(a1), z1 = zc + r * Math.sin(a1);
-            let x2 = xc + r * Math.cos(a2), z2 = zc + r * Math.sin(a2);
-            const g = .12;
-            [x1, z1, x2, z2] = [x1 + (x2 - x1) * g, z1 + (z2 - z1) * g, x2 - (x2 - x1) * g, z2 - (z2 - z1) * g];
-            if (Math.min(z1, z2) < zNear * .7) continue;
-            const zm = (z1 + z2) / 2, depth = (zm - zNear) / (zFar - zNear);
-            ctx.strokeStyle = W + Math.max(0, (1 - depth * 1.15)) * (.6 + R() * .4) + ')';
-            ctx.lineWidth = Math.max(.6, f * .016 / zm);
-            const [sx1, sy1] = P(x1, z1), [sx2, sy2] = P(x2, z2);
-            ctx.beginPath(); ctx.moveTo(sx1, sy1); ctx.lineTo(sx2, sy2); ctx.stroke();
-          }
-        }
-      }
-    },
-    // sylwetka coupé pod lampami
-    car(ctx, w, h) {
-      const X = v => v * w, Y = v => v * h;
-      const body = () => {
-        ctx.beginPath();
-        ctx.moveTo(X(.03), Y(.8));
-        ctx.bezierCurveTo(X(0), Y(.7), X(.01), Y(.52), X(.06), Y(.46));
-        ctx.bezierCurveTo(X(.15), Y(.38), X(.25), Y(.3), X(.33), Y(.15));
-        ctx.bezierCurveTo(X(.38), Y(.05), X(.5), Y(.02), X(.56), Y(.06));
-        ctx.bezierCurveTo(X(.62), Y(.12), X(.66), Y(.26), X(.72), Y(.32));
-        ctx.bezierCurveTo(X(.85), Y(.38), X(.97), Y(.44), X(.995), Y(.56));
-        ctx.lineTo(X(.99), Y(.8)); ctx.lineTo(X(.875), Y(.8));
-        ctx.arc(X(.8), Y(.8), X(.075), 0, Math.PI, true);
-        ctx.lineTo(X(.275), Y(.8));
-        ctx.arc(X(.2), Y(.8), X(.075), 0, Math.PI, true);
-        ctx.closePath();
-      };
-      // odbicie w posadzce
-      ctx.save(); ctx.translate(X(.5), Y(.84)); ctx.scale(1, .07);
-      const fl = ctx.createRadialGradient(0, 0, 0, 0, 0, X(.55));
-      fl.addColorStop(0, W + '.22)'); fl.addColorStop(1, W + '0)');
-      ctx.fillStyle = fl; ctx.beginPath(); ctx.arc(0, 0, X(.55), 0, Math.PI * 2); ctx.fill(); ctx.restore();
-      const bg = ctx.createLinearGradient(0, 0, 0, h);
-      bg.addColorStop(0, '#1c1c1c'); bg.addColorStop(.45, '#0b0b0b'); bg.addColorStop(1, '#030303');
-      ctx.fillStyle = bg; body(); ctx.fill();
-      // odbicia lamp na karoserii
-      ctx.save(); body(); ctx.clip();
-      const r = w / 22;
-      for (let i = 0; i < 7; i++) {
-        const y = h * (.08 + i * .075);
-        ctx.strokeStyle = W + Math.max(.05, .55 - i * .08) + ')'; ctx.lineWidth = Math.max(1, 2.4 - i * .3);
-        for (let x = -r; x < w + r; x += r * 1.8) {
-          const off = (i % 2) * r * .9, bend = Math.sin(((x + off) / w) * Math.PI) * h * .05;
-          ctx.beginPath(); ctx.moveTo(x + off, y - bend); ctx.lineTo(x + off + r * 1.1, y - bend * .92); ctx.stroke();
-        }
-      }
-      // linia boczna
-      const sh = ctx.createLinearGradient(0, 0, w, 0);
-      sh.addColorStop(0, W + '0)'); sh.addColorStop(.5, W + '.55)'); sh.addColorStop(1, W + '.1)');
-      ctx.strokeStyle = sh; ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.moveTo(X(.05), Y(.5)); ctx.bezierCurveTo(X(.4), Y(.47), X(.7), Y(.5), X(.99), Y(.58)); ctx.stroke();
-      ctx.restore();
-      // szyba boczna
-      ctx.beginPath();
-      ctx.moveTo(X(.355), Y(.18)); ctx.bezierCurveTo(X(.4), Y(.09), X(.52), Y(.07), X(.56), Y(.1));
-      ctx.bezierCurveTo(X(.6), Y(.15), X(.63), Y(.24), X(.655), Y(.3)); ctx.lineTo(X(.37), Y(.3)); ctx.closePath();
-      ctx.fillStyle = '#050505'; ctx.fill(); ctx.strokeStyle = W + '.22)'; ctx.lineWidth = 1; ctx.stroke();
-      // linia dachu w świetle
-      ctx.strokeStyle = W + '.9)'; ctx.lineWidth = 1.3; ctx.beginPath();
-      ctx.moveTo(X(.2), Y(.33)); ctx.bezierCurveTo(X(.27), Y(.27), X(.3), Y(.2), X(.33), Y(.15));
-      ctx.bezierCurveTo(X(.38), Y(.05), X(.5), Y(.02), X(.56), Y(.06));
-      ctx.bezierCurveTo(X(.62), Y(.12), X(.66), Y(.26), X(.72), Y(.32));
-      ctx.stroke();
-      // koła
-      for (const cx of [.2, .8]) {
-        const x = X(cx), y = Y(.8), rr = X(.062);
-        ctx.fillStyle = '#020202'; ctx.beginPath(); ctx.arc(x, y, rr, 0, Math.PI * 2); ctx.fill();
-        ctx.strokeStyle = W + '.35)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(x, y, rr * .68, 0, Math.PI * 2); ctx.stroke();
-        ctx.strokeStyle = W + '.15)';
-        for (let k = 0; k < 10; k++) { const a = k / 10 * Math.PI * 2; ctx.beginPath(); ctx.moveTo(x + Math.cos(a) * rr * .15, y + Math.sin(a) * rr * .15); ctx.lineTo(x + Math.cos(a) * rr * .66, y + Math.sin(a) * rr * .66); ctx.stroke(); }
-      }
-    }
-  };
-
-  const paintScene = c => {
-    const fn = scenes[c.dataset.scene]; if (!fn) return;
-    const dpr = Math.min(devicePixelRatio || 1, 2), w = c.clientWidth, h = c.clientHeight;
-    if (!w || !h) return;
-    c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
-    const ctx = c.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    fn(ctx, w, h, rng(+c.dataset.seed || 1));
-  };
-  const paint = () => $$('canvas.scene').forEach(paintScene);
-  paint();
-  let rz, lastW = innerWidth;
-  addEventListener('resize', () => {
-    clearTimeout(rz);
-    rz = setTimeout(() => { if (innerWidth !== lastW) { lastW = innerWidth; paint(); } }, 150);
-  });
 
   /* ---------- nawigacja ---------- */
   const nav = $('#nav'), hero = $('.hero');
